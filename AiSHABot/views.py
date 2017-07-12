@@ -66,4 +66,5 @@ def post_facebook_message(fbid, recevied_message,mtype):
 
 
 def privacy(request):
-    return render(request, 'privacypolicy.html', context={})
+    return render(request, 'privacypolicyaisha.html', context={})
+

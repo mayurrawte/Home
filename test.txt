@@ -1,0 +1,1 @@
+{u'timestamp': 1499888046149, u'message': {u'text': u'Hey', u'mid': u'mid.$cAAa0LYfjxq9jaZCYRVdOEszurUtv', u'seq': 28271}, u'recipient': {u'id': u'1951491178466644'}, u'sender': {u'id': u'1384105985000668'}}

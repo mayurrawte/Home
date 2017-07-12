@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Someone @ port 80</title>
+	<meta charset="utf-8">
+    {% load static %}
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'index/css/generic.css' %}">
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Some-One</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">WHO</a></li>
+        <li><a href="#">WHAT</a></li>
+        <li><a href="#">WHERE</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center">
+    <div class="header-text">
+        <h1>Hello World !<br /> I am <br /> <span id="head-title"></span></h1>
+    </div>
+</div>
+
+
+
+<!-- Second Container -->
+<div class="container-fluid bg-2 text-center">
+  <h3 class="margin">Who Am I?</h3>
+  <p> I am one of those crazy geeks  who would love to work rather than anything else. I have friends, i can count on fingers, my laptop is one of the closed among them. I spend hours exploring with it. I maybe quite, not open to many, a covered book and not at all hungry for attention . Not perfect, maybe not even closest to it but i compete with my myself, a better version of me everyday. Helping others,  that's what keeps me going. Everyone around inspires me to do things that i never thought i could do, positivity. Directly or indirectly , knowingly or unknowingly you help me to be a better person. <br /> Meet me I am just someone !</p>
+
+</div>
+
+
+<div class="container-fluid bg-3 ">
+
+	<div class="col-md-10">
+		<h3 class="margin" style="width: 65%;margin: 30px auto;">Journey So Far</h3>
+		<div class="row">
+			<ul class="timeline">
+			  <li class="timeline-event">
+			  	<div class="timeline-cicon"><img src="{% static 'index/images/child.png'%}"></div>
+			    <label class="timeline-event-icon"></label>
+			    <div class="timeline-event-copy">
+			      <p class="timeline-event-thumbnail">November 1995</p>
+			      <p>Mayur = new Person("Mayur","weird introvert"); <br /><small>I was initialized</small></p>
+			    </div>
+			  </li>
+			  <li class="timeline-event">
+    			<div class="timeline-cicon"><img src="{% static 'index/images/boy.png' %}"></div>
+			    <label class="timeline-event-icon"></label>
+			    <div class="timeline-event-copy">
+			      <p class="timeline-event-thumbnail">Early 2013</p>
+			      <p>Spend my life like a normal human. <br /><small>Everything was fine !</small></p>
+			    </div>
+			  </li>
+			  <li class="timeline-event">
+				  <div class="timeline-cicon"><img src="{% static 'index/images/college.png' %}"></div>
+			    <label class="timeline-event-icon"></label>
+			    <div class="timeline-event-copy">
+			      <p class="timeline-event-thumbnail">August 2013</p>
+			      <p>Taken admission in Information Technology, Engineering <br /><small>don't know how and why. Maybe because ...... ! Don't know :P</small></p>
+			    </div>
+			  </li>
+			  <li class="timeline-event">
+				  <div class="timeline-cicon"><img src="{% static 'index/images/computer.png' %}"></div>
+			    <label class="timeline-event-icon"></label>
+			    <div class="timeline-event-copy">
+			      <p class="timeline-event-thumbnail">Dec 2013</p>
+			      <p>Got introduced to computer <br /><small>Life was about to change </small></p>
+			    </div>
+			  </li>
+			  <li class="timeline-event">
+				  <div class="timeline-cicon"><img src="{% static 'index/images/love.png' %}"></div>
+			    <label class="timeline-event-icon"></label>
+			    <div class="timeline-event-copy">
+			      <p class="timeline-event-thumbnail">Jan 2014</p>
+			      <p>Found love : Programming<br /><small> C was so impressive  </small></p>
+			    </div>
+			  </li>
+			  <li class="timeline-event">
+				  <div class="timeline-cicon"><img src="{% static 'index/images/object.png' %}"></div>
+			    <label class="timeline-event-icon"></label>
+			    <div class="timeline-event-copy">
+			      <p class="timeline-event-thumbnail">May 2014</p>
+			      <p>Object Oriented World<br /><small> Everything became object and class, even i was an object.  </small></p>
+			    </div>
+			  </li>
+			  <li class="timeline-event">
+				  <div class="timeline-cicon"><img src="{% static 'index/images/cs.png' %}"></div>
+			    <label class="timeline-event-icon"></label>
+			    <div class="timeline-event-copy">
+			      <p class="timeline-event-thumbnail">August 2014</p>
+			      <p>Microsoft Fever : C# (that's not hash)<br /><small>Windows Phone App Development </small></p>
+			    </div>
+			  </li>
+			  <li class="timeline-event">
+			  	<div class="timeline-cicon"><img src="{% static 'index/images/hack.png' %}"></div>
+			    <label class="timeline-event-icon"></label>
+			    <div class="timeline-event-copy">
+			      <p class="timeline-event-thumbnail">Nov 2015</p>
+			      <p>I want to be a hacker.<br /><small>Kali linux made me feel like one.</small></p>
+			    </div>
+			  </li>
+			  <li class="timeline-event">
+			  	<div class="timeline-cicon"><img src="{% static 'index/images/programmer.png' %}"></div>
+			    <label class="timeline-event-icon"></label>
+			    <div class="timeline-event-copy">
+			      <p class="timeline-event-thumbnail">Jan 2015</p>
+			      <p>Programming languages , i need to learn them all !<br /><small>Java, HTML, CSS, JAVASCRIPT, PHP ! <br /> HTML is not a language by the way :P</small></p>
+			    </div>
+			  </li>
+			  <li class="timeline-event">
+				  <div class="timeline-cicon"><img src="{% static 'index/images/web.png' %}"></div>
+			    <label class="timeline-event-icon"></label>
+			    <div class="timeline-event-copy">
+			      <p class="timeline-event-thumbnail">July 2015</p>
+			      <p>Practising them was all i need<br /><small>Technical Fest Official Site</small></p>
+			    </div>
+			  </li>
+			  <li class="timeline-event">
+			   <div class="timeline-cicon"><img src="{% static 'index/images/design.png' %}"></div>
+			    <label class="timeline-event-icon"></label>
+			    <div class="timeline-event-copy">
+			      <p class="timeline-event-thumbnail">Augest 2015</p>
+			      <p>I should try Grphic Designing too<br /><small>Corel Draw ,Photoshop and Illustrator became new friends.</small></p>
+			    </div>
+			  </li>
+			  <li class="timeline-event">
+			   <div class="timeline-cicon"><img src="{% static 'index/images/animation.png'%}"></div>
+			    <label class="timeline-event-icon"></label>
+			    <div class="timeline-event-copy">
+			      <p class="timeline-event-thumbnail">Oct 2015</p>
+			      <p>Maybe i should try Animation<br /><small>Blender i takes lots of time.</small></p>
+			    </div>
+			  </li>
+			  <li class="timeline-event">
+			   <div class="timeline-cicon"><img src="{% static 'index/images/startup.png' %}"></div>
+			    <label class="timeline-event-icon"></label>
+			    <div class="timeline-event-copy">
+			      <p class="timeline-event-thumbnail">Nov 2015</p>
+			      <p>Working for a Startup is quite fun<br /><small>Worked for many finally joined one<br />Lots of projects, lots of things to learn.</small></p>
+			    </div>
+			  </li>
+			  <li class="timeline-event">
+			  	<div class="timeline-cicon"><img src="{% static 'index/images/python.png' %}"></div>
+			    <label class="timeline-event-icon"></label>
+			    <div class="timeline-event-copy">
+			      <p class="timeline-event-thumbnail">14th Feb 2016</p>
+			      <p>Init Typingkeeda Django python <br /><small>That's how i met python.</small></p>
+			    </div>
+			  </li>
+			  <li class="timeline-event">
+			  	<div class="timeline-cicon"><img src="{% static 'index/images/iot.png' %}"></div>
+			    <label class="timeline-event-icon"></label>
+			    <div class="timeline-event-copy">
+			      <p class="timeline-event-thumbnail">Sep 2016</p>
+			      <p>Internet of Things<br /><small>Eliot: I can Control Anything ! <br /> Seriously </small></p>
+			    </div>
+			  </li>
+			  <li class="timeline-event">
+			  	<div class="timeline-cicon"><img src="{% static 'index/images/ai.png' %}"></div>
+			    <label class="timeline-event-icon"></label>
+			    <div class="timeline-event-copy">
+			      <p class="timeline-event-thumbnail">April 2017</p>
+			      <p>Code is becoming Intelligent<br /><small>Aritifical Intelligence <br />  </small></p>
+			    </div>
+			  </li>
+
+
+			</ul>
+		</div>
+	</div>
+
+
+</div>
+
+<!-- Third Container (Grid)
+<div class="container-fluid bg-3 text-center">
+  <h3 class="margin">Journey</h3><br>
+  <div class="row">
+    <div class="col-sm-4">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <img src="birds1.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+    </div>
+    <div class="col-sm-4">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <img src="birds2.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+    </div>
+    <div class="col-sm-4">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <img src="birds3.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+    </div>
+  </div>
+</div>
+
+-->
+
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+  <p>Someone's Design</p>
+</footer>
+<script src="{% static 'index/js/typed.js' %}"></script>
+<script>
+      $(function(){
+          $("#head-title").typed({
+            strings: ["Developer", "Designer" ,"Tech Enthusiast"," Introvert", "and ","complex combination of atoms  :) "],
+            typeSpeed: 200,
+            loop: true,
+            startDelay: 100
+          });
+      });
+    </script>
+
+</body>
+</html>

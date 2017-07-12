@@ -4,5 +4,5 @@ from __future__ import unicode_literals
 from django.apps import AppConfig
 
 
-class RailmitraConfig(AppConfig):
-    name = 'RailMitra'
+class RailmitrabotConfig(AppConfig):
+    name = 'RailMitraBot'

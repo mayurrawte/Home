@@ -4,6 +4,7 @@
 
 # User-specific stuff:
 settings.py
+*.pyc
 .idea/
 .idea/**/workspace.xml
 .idea/**/tasks.xml

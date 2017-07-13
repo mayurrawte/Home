@@ -9,7 +9,7 @@ def getStationsFromTrainNumber(trainNo,jDate=datetime.date.today().strftime('%d-
     data = {'trainNo': trainNo, 'jDate': jDate, 'jDateMap': jDate,'jDateDay': jDateDay}
     stationsList = collections.OrderedDict()
     r = requests.post('https://enquiry.indianrail.gov.in/mntes/q?opt=TrainRunning&subOpt=FindStationList',data=data)
-    soup = BeautifulSoup(r.text,'html.parser')
+    soup = BeautifulSoup(r.text,'lxml')
     stations = soup.find(id='jStation').find_all('option')[1:]
     for station in stations:
         stationsList[station.get('value')] = station.text

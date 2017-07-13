@@ -45,18 +45,20 @@ class RailMitraView(generic.View):
                         ob = open('test.txt', 'w+')
                         ob.write(json.dumps(data))
                         def pps(k, v):
-                            btnar.append({"type": "postback", "title": v, "payload": k})
+                            btnar.append({"type": "postback", "title": v, "payload": {"jStation": k, "prevData": data['originalReq']}})
                         [pps(k, v) for k, v in data['stations'].iteritems() if Station in v.lower()]
                         post_button(message['sender']['id'], btnar)
                         #post_facebook_message(message['sender']['id'], message['message']['text'], 1)
                     else:
                         post_facebook_message(message['sender']['id'], message['message']['attachments'], 2)
                 elif 'postback' in message:
+                    send_status()
                     post_facebook_message(message['sender']['id'], message['postback']['payload'], 1)
         return HttpResponse()
 
 
 
+def send_status():
 
 def post_button(fbid, btnarr):
     post_message_url = 'https://graph.facebook.com/v2.9/me/messages?access_token=EAAcQ73ZA7PfgBALIekJFW8zudPg9XKdG7oNGA2aR33sRqKEppHrVBY5UCGsxNHqe2PyI4qRy9yoJa3UoUJ9NCvoPl5t6SLxV5OYmEX4GnHtZACX0SBq6N29YdVQLDTqX0SE1FfhDNSdxbWGEk1ZB9l1MC6DxZCqygNaROQF3IZA4pJd69rqvj'

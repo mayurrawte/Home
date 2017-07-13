@@ -45,11 +45,11 @@ class RailMitraView(generic.View):
 
 
 def post_facebook_message(fbid, recevied_message, mtype):
-    post_message_url = 'https://graph.facebook.com/v2.9/me/messages?access_token=EAATpRWW0h8gBALetLjtIquXPRtrZBxwNOTUrJh2OPZB4o0DCAZBb1e3kpnYJzSqXrweXSzMSKf3YJXvXKeAoE4mJdZBwvLyAkoHZBmONLtUosKLIxLumSHEwdN26yZCT6wsf6WEgIPZCQDA8Lejnz0WzDRdiDlbcyFjMBZCwLZCcTZBgZDZD'
+    post_message_url = 'https://graph.facebook.com/v2.9/me/messages?access_token=EAAcQ73ZA7PfgBAG1iR1rizqai3dv0T5LLTuekQLEyF8d6BSCNIqdFuP62XCFJNPj0RG9Euapmsw73qphPPZBV3MVKSQRrNdAZBY7Y4Uovn7IOc4ZBvK6L4e8rcBPEy6phwQZAvlP539dZBFZA676W3QYjVsf1eCnhjns5f9uSzx6ePsXF72ZA8mX'
     if mtype == 1:
-        response_msg = json.dumps({"recipient":{"id":fbid}, "message": {"text":recevied_message}})
+        response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"text": recevied_message}})
     elif mtype == 2:
         response_msg = json.dumps({"message": {"attachment": {"type": "image", "payload": {"url": "https://scontent.xx.fbcdn.net/v/t39.1997-6/p100x100/851587_369239346556147_162929011_n.png?_nc_ad=z-m&oh=ad2a1e37edd885afb4acd987ad8e33c6&oe=59DEDBB0"}}}, "recipient": {"id": "1346441788784848"}})
-    status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
+    status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
     pprint(status.json())
 

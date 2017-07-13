@@ -26,10 +26,18 @@ def TrainRunningStatus(trainNo, jStation, jDate, jDateMap, jDateDay):
     print(soup.find(id='ResTab').text)
 
 
+def post_facebook_message(fbid, btnarr):
+    post_message_url = 'https://graph.facebook.com/v2.9/me/messages?access_token=EAAcQ73ZA7PfgBALIekJFW8zudPg9XKdG7oNGA2aR33sRqKEppHrVBY5UCGsxNHqe2PyI4qRy9yoJa3UoUJ9NCvoPl5t6SLxV5OYmEX4GnHtZACX0SBq6N29YdVQLDTqX0SE1FfhDNSdxbWGEk1ZB9l1MC6DxZCqygNaROQF3IZA4pJd69rqvj'
+    #response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"text": "maakda nai chal raha"}})
+    response_msg = json.dumps({"recipient":{"id": fbid }, "message":{"attachment":{"type":"template", "payload":{"template_type":"button", "text":"What do you want to do next?", "buttons":btnarr } } } })
+    status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
+    print(status.json())
 
-trainNo = raw_input('enter train number')
+
+trainNo, apprstation  = raw_input('enter train number and station name').split()
 data = json.loads(getStationsFromTrainNumber(trainNo))
-station = raw_input("Select any station from "+ data['stations'] )
-TrainRunningStatus(data['originalReq']['trainNo'], station, data['originalReq']['jDate'], data['originalReq']['jDateMap'], data['originalReq']['jDateDay'])
-
-
+btnar = []
+def pps(k,v):
+    btnar.append({"type":"postback","title": v, "payload": k})
+[pps( k,v) for k,v in data['stations'].iteritems() if apprstation in v.lower()]
+print btnar

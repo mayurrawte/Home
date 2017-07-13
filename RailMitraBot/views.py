@@ -2,11 +2,12 @@
 from __future__ import unicode_literals
 import json
 from pprint import pprint
-
+import railapi
 import requests
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views import generic
+
 
 
 # Create your views here.
@@ -37,14 +38,30 @@ class RailMitraView(generic.View):
                 ob = open('lastlog.txt','w+')
                 ob.write(json.dumps(message))
                 if 'message' in message:
-
                     if 'text' in message['message']:
-                        post_facebook_message(message['sender']['id'], message['message']['text'], 1)
+                        trainNo, Station = str(message['message']['text']).split()
+                        data = json.loads(railapi.getStationsFromTrainNumber(trainNo))
+                        btnar = []
+                        def pps(k, v):
+                            btnar.append({"type": "postback", "title": v, "payload": k})
+                        [pps(k, v) for k, v in data['stations'].iteritems() if Station in v.lower()]
+                        post_button(message['sender']['id'], btnar)
+                        #post_facebook_message(message['sender']['id'], message['message']['text'], 1)
                     else:
                         post_facebook_message(message['sender']['id'], message['message']['attachments'], 2)
                 elif 'postback' in message:
                     post_facebook_message(message['sender']['id'], message['postback']['payload'], 1)
         return HttpResponse()
+
+
+
+
+def post_button(fbid, btnarr):
+    post_message_url = 'https://graph.facebook.com/v2.9/me/messages?access_token=EAAcQ73ZA7PfgBALIekJFW8zudPg9XKdG7oNGA2aR33sRqKEppHrVBY5UCGsxNHqe2PyI4qRy9yoJa3UoUJ9NCvoPl5t6SLxV5OYmEX4GnHtZACX0SBq6N29YdVQLDTqX0SE1FfhDNSdxbWGEk1ZB9l1MC6DxZCqygNaROQF3IZA4pJd69rqvj'
+    #response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"text": "maakda nai chal raha"}})
+    response_msg = json.dumps({"recipient":{"id": fbid }, "message":{"attachment":{"type":"template", "payload":{"template_type":"button", "text":"What do you want to do next?", "buttons":btnarr } } } })
+    status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
+    print(status.json())
 
 
 def post_facebook_message(fbid, recevied_message, mtype):

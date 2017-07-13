@@ -52,7 +52,7 @@ class RailMitraView(generic.View):
                     else:
                         post_facebook_message(message['sender']['id'], message['message']['attachments'], 2)
                 elif 'postback' in message:
-                    send_status()
+                    #left work
                     post_facebook_message(message['sender']['id'], message['postback']['payload'], 1)
         return HttpResponse()
 

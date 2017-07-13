@@ -37,14 +37,13 @@ class RailMitraView(generic.View):
                 ob = open('lastlog.txt','w+')
                 ob.write(json.dumps(message))
                 if 'message' in message:
-                    # Print the message to the terminal
-                    obj = open('test.txt', 'w+')
-                    obj.write(str(message))
 
                     if 'text' in message['message']:
                         post_facebook_message(message['sender']['id'], message['message']['text'], 1)
                     else:
                         post_facebook_message(message['sender']['id'], message['message']['attachments'], 2)
+                elif 'postback' in message:
+                    post_facebook_message(message['sender']['id'], message['postback']['payload'], 1)
         return HttpResponse()
 
 

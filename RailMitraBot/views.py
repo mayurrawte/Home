@@ -30,7 +30,6 @@ class RailMitraView(generic.View):
         # multiple messages in a single call during high load
         obj = open('incomingpostmessage.txt', 'w+')
         obj.write(json.dumps(incoming_message))
-        post_facebook_message(incoming_message)
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
                 # Check to make sure the received call is a message call

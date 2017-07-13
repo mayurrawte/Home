@@ -33,11 +33,3 @@ def post_facebook_message(fbid, btnarr):
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
     print(status.json())
 
-
-trainNo, apprstation  = raw_input('enter train number and station name').split()
-data = json.loads(getStationsFromTrainNumber(trainNo))
-btnar = []
-def pps(k,v):
-    btnar.append({"type":"postback","title": v, "payload": k})
-[pps( k,v) for k,v in data['stations'].iteritems() if apprstation in v.lower()]
-print btnar

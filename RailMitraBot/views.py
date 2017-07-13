@@ -28,6 +28,9 @@ class RailMitraView(generic.View):
         incoming_message = json.loads(self.request.body.decode('utf-8'))
         # Facebook recommends going through every entry since they might send
         # multiple messages in a single call during high load
+        obj = open('incomingpostmessage.txt', 'w+')
+        obj.write(incoming_message)
+        post_facebook_message(incoming_message)
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
                 # Check to make sure the received call is a message call
@@ -45,7 +48,7 @@ class RailMitraView(generic.View):
 
 
 def post_facebook_message(fbid, recevied_message, mtype):
-    post_message_url = 'https://graph.facebook.com/v2.9/me/messages?access_token=EAAcQ73ZA7PfgBAG1iR1rizqai3dv0T5LLTuekQLEyF8d6BSCNIqdFuP62XCFJNPj0RG9Euapmsw73qphPPZBV3MVKSQRrNdAZBY7Y4Uovn7IOc4ZBvK6L4e8rcBPEy6phwQZAvlP539dZBFZA676W3QYjVsf1eCnhjns5f9uSzx6ePsXF72ZA8mX'
+    post_message_url = 'https://graph.facebook.com/v2.9/me/messages?access_token=EAAcQ73ZA7PfgBALIekJFW8zudPg9XKdG7oNGA2aR33sRqKEppHrVBY5UCGsxNHqe2PyI4qRy9yoJa3UoUJ9NCvoPl5t6SLxV5OYmEX4GnHtZACX0SBq6N29YdVQLDTqX0SE1FfhDNSdxbWGEk1ZB9l1MC6DxZCqygNaROQF3IZA4pJd69rqvj'
     if mtype == 1:
         response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"text": recevied_message}})
     elif mtype == 2:

@@ -29,12 +29,14 @@ class RailMitraView(generic.View):
         # Facebook recommends going through every entry since they might send
         # multiple messages in a single call during high load
         obj = open('incomingpostmessage.txt', 'w+')
-        obj.write(incoming_message)
+        obj.write(json.dumps(incoming_message))
         post_facebook_message(incoming_message)
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
                 # Check to make sure the received call is a message call
                 # This might be delivery, optin, postback for other events
+                ob = open('lastlog.txt','w+')
+                ob.write(json.dumps(message))
                 if 'message' in message:
                     # Print the message to the terminal
                     obj = open('test.txt', 'w+')

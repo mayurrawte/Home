@@ -45,7 +45,6 @@ class RailMitraView(generic.View):
                             command_type = 1
                         except ValueError:
                             errmsg = "Hi! Main Hu tumhara RailMitra. Train ki jaankari ke liye reply with \n TrainNumber <space> StationName \n Eg. 11057 Bhopal"
-                            post_facebook_message(message['sender']['id'], errmsg, 1)
                             command_type = 0
                         if command_type:
                             data = json.loads(railapi.getStationsFromTrainNumber(trainNo))
@@ -59,10 +58,12 @@ class RailMitraView(generic.View):
                             post_button(message['sender']['id'], btnar)
                             #post_facebook_message(message['sender']['id'], message['message']['text'], 1)
                         else:
-                            post_facebook_message(message['sender']['id'], message['message']['attachments'], 2)
-                    elif 'postback' in message:
-                        #left work
-                        postback_reply(message['sender']['id'], message['postback']['payload'])
+                            post_facebook_message(message['sender']['id'], errmsg, 1)
+                    else:
+                        post_facebook_message(message['sender']['id'], message['message']['attachments'], 2)
+                elif 'postback' in message:
+                    #left work
+                    postback_reply(message['sender']['id'], message['postback']['payload'])
         return HttpResponse()
 
 #a = '{"jStation": "BAU#false", "prevData": {"jDateDay": "FRI", "trainNo": "11057", "jDate": "14-Jul-2017", "jDateMap": "14-Jul-2017"}}'

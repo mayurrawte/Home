@@ -54,7 +54,7 @@ class RailMitraView(generic.View):
                             def pps(k, v):
                                 payload = json.dumps({"jStation": k, "prevData": data['originalReq']})
                                 btnar.append({"type": "postback", "title": v, "payload": payload})
-                            [pps(k, v) for k, v in data['stations'].iteritems() if Station in v.lower()]
+                            [pps(k, v) for k, v in data['stations'].iteritems() if Station.lower() in v.lower()]
                             post_button(message['sender']['id'], btnar)
                             #post_facebook_message(message['sender']['id'], message['message']['text'], 1)
                         else:

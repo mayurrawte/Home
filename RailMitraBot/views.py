@@ -39,7 +39,12 @@ class RailMitraView(generic.View):
                 ob.write(json.dumps(message))
                 if 'message' in message:
                     if 'text' in message['message']:
-                        trainNo, Station = str(message['message']['text']).split()
+                        try:
+                            trainNo, Station = str(message['message']['text']).split()
+                        except ValueError:
+                            errmsg = "Hi! Main Hu tumhara RailMitra. Train ki jaankari ke liye reply with \n TrainNumber <space> StationName \n Eg. 11057 Bhopal"
+                            post_facebook_message(message['sender']['id'], errmsg, 1)
+
                         data = json.loads(railapi.getStationsFromTrainNumber(trainNo))
                         btnar = []
                         ob = open('test.txt', 'w+')

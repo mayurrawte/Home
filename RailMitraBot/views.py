@@ -45,7 +45,8 @@ class RailMitraView(generic.View):
                         ob = open('test.txt', 'w+')
                         ob.write(json.dumps(data))
                         def pps(k, v):
-                            btnar.append({"type": "postback", "title": v, "payload": {"jStation": k, "prevData": data['originalReq']}})
+                            payload = json.dumps({"jStation": k, "prevData": data['originalReq']})
+                            btnar.append({"type": "postback", "title": v, "payload": payload})
                         [pps(k, v) for k, v in data['stations'].iteritems() if Station in v.lower()]
                         post_button(message['sender']['id'], btnar)
                         #post_facebook_message(message['sender']['id'], message['message']['text'], 1)
@@ -53,11 +54,19 @@ class RailMitraView(generic.View):
                         post_facebook_message(message['sender']['id'], message['message']['attachments'], 2)
                 elif 'postback' in message:
                     #left work
-                    post_facebook_message(message['sender']['id'], message['postback']['payload'], 1)
+                    postback_reply(message['sender']['id'], message['postback']['payload'])
         return HttpResponse()
 
+#a = '{"jStation": "BAU#false", "prevData": {"jDateDay": "FRI", "trainNo": "11057", "jDate": "14-Jul-2017", "jDateMap": "14-Jul-2017"}}'
 
-
+def postback_reply(fbid, data):
+    data = json.loads(data)
+    resultData = railapi.TrainRunningStatus(data['prevData']['trainNo'], data['jStation'], data['prevData']['jDate'], data['prevData']['jDateMap'], data['prevData']['jDateDay'])
+    post_message_url = 'https://graph.facebook.com/v2.9/me/messages?access_token=EAAcQ73ZA7PfgBALIekJFW8zudPg9XKdG7oNGA2aR33sRqKEppHrVBY5UCGsxNHqe2PyI4qRy9yoJa3UoUJ9NCvoPl5t6SLxV5OYmEX4GnHtZACX0SBq6N29YdVQLDTqX0SE1FfhDNSdxbWGEk1ZB9l1MC6DxZCqygNaROQF3IZA4pJd69rqvj'
+    rsData = {"recipient": {"id": fbid }, "message": {"attachment": {"type": "template", "payload": {"template_type": "generic", "elements": [{"title": resultData['trainName'] + " is "+ resultData['delayTime'] +" Arrival : "+ resultData['actArTime'][-5:] +" Actual : "+ resultData['schArTime'][-5:], "image_url": "http://toons.artie.com/gifs/arg-newtrain-crop.gif", "subtitle": resultData['lastLocation'] } ] } } } }
+    #response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"attachment": {"type": "template", "payload": {"template_type": "button", "text": "What do you want to do next?", "buttons": btnarr}}}})
+    status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=json.dumps(rsData))
+    print(status.json())
 
 
 def post_button(fbid, btnarr):

@@ -23,7 +23,18 @@ def TrainRunningStatus(trainNo, jStation, jDate, jDateMap, jDateDay):
     data = {'trainNo': trainNo, 'jStation': jStation, 'jDate': jDate, 'jDateMap': jDate, 'jDateDay': jDateDay}
     r = requests.post('https://enquiry.indianrail.gov.in/mntes/q?opt=TrainRunning&subOpt=ShowRunC', data=data)
     soup = BeautifulSoup(r.text, 'lxml')
-    print(soup.find(id='ResTab').text)
+    table = soup.find(id='ResTab')
+    trs = table.find_all('tr')
+    trainName = trs[0].find_all('td')[1].text
+    stationName = trs[1].find_all('td')[1].text
+    schArTime = trs[3].find_all('td')[1].text
+    actArTime = trs[4].find_all('td')[1].text
+    delayTime = trs[5].find_all('td')[1].text
+    lastLocation = (trs[9].find_all('td')[1].text)
+    lastLocation = " ".join(lastLocation.split())
+    resultData = {'trainName': trainName, 'schArTime': schArTime, 'actArTime': actArTime, 'delayTime': delayTime, 'lastLocation': lastLocation, 'stationName': stationName}
+    #print resultData
+    return resultData
 
 
 def post_facebook_message(fbid, btnarr):

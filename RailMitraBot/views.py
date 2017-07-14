@@ -37,29 +37,32 @@ class RailMitraView(generic.View):
                 # This might be delivery, optin, postback for other events
                 ob = open('lastlog.txt','w+')
                 ob.write(json.dumps(message))
+                command_type = 0
                 if 'message' in message:
                     if 'text' in message['message']:
                         try:
                             trainNo, Station = str(message['message']['text']).split()
+                            command_type = 1
                         except ValueError:
                             errmsg = "Hi! Main Hu tumhara RailMitra. Train ki jaankari ke liye reply with \n TrainNumber <space> StationName \n Eg. 11057 Bhopal"
                             post_facebook_message(message['sender']['id'], errmsg, 1)
-
-                        data = json.loads(railapi.getStationsFromTrainNumber(trainNo))
-                        btnar = []
-                        ob = open('test.txt', 'w+')
-                        ob.write(json.dumps(data))
-                        def pps(k, v):
-                            payload = json.dumps({"jStation": k, "prevData": data['originalReq']})
-                            btnar.append({"type": "postback", "title": v, "payload": payload})
-                        [pps(k, v) for k, v in data['stations'].iteritems() if Station in v.lower()]
-                        post_button(message['sender']['id'], btnar)
-                        #post_facebook_message(message['sender']['id'], message['message']['text'], 1)
-                    else:
-                        post_facebook_message(message['sender']['id'], message['message']['attachments'], 2)
-                elif 'postback' in message:
-                    #left work
-                    postback_reply(message['sender']['id'], message['postback']['payload'])
+                            command_type = 0
+                        if command_type:
+                            data = json.loads(railapi.getStationsFromTrainNumber(trainNo))
+                            btnar = []
+                            ob = open('test.txt', 'w+')
+                            ob.write(json.dumps(data))
+                            def pps(k, v):
+                                payload = json.dumps({"jStation": k, "prevData": data['originalReq']})
+                                btnar.append({"type": "postback", "title": v, "payload": payload})
+                            [pps(k, v) for k, v in data['stations'].iteritems() if Station in v.lower()]
+                            post_button(message['sender']['id'], btnar)
+                            #post_facebook_message(message['sender']['id'], message['message']['text'], 1)
+                        else:
+                            post_facebook_message(message['sender']['id'], message['message']['attachments'], 2)
+                    elif 'postback' in message:
+                        #left work
+                        postback_reply(message['sender']['id'], message['postback']['payload'])
         return HttpResponse()
 
 #a = '{"jStation": "BAU#false", "prevData": {"jDateDay": "FRI", "trainNo": "11057", "jDate": "14-Jul-2017", "jDateMap": "14-Jul-2017"}}'

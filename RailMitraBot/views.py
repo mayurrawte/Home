@@ -35,7 +35,7 @@ class RailMitraView(generic.View):
                         messageArgs = str(text).split()
                         messageArgsLen = len(messageArgs)
                         if messageArgsLen == 1:
-                            if str(messageArgs).strip().lower() == 'help':
+                            if str(messageArgs[0]).strip().lower() == 'help':
                                 i_need_help(fbid)
                             else:
                                 railapi.defaultMessage(fbid)

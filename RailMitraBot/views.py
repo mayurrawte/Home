@@ -37,10 +37,12 @@ class RailMitraView(generic.View):
                         if messageArgsLen == 1:
                             if str(messageArgs).strip().lower() == 'help':
                                 i_need_help(fbid)
+                            else:
+                                railapi.defaultMessage(fbid)
                         elif messageArgsLen == 2:
                             trainNo, station = messageArgs[0], messageArgs[1]
                             running_status(fbid, trainNo, station)
-                        elif messageArgs == 3:
+                        elif messageArgsLen == 3:
                             railapi.post_facebook_message_normal(fbid,'Mayur is working hard to get you live station status')
                         else:
                             railapi.defaultMessage(fbid)

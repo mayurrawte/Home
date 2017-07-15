@@ -67,8 +67,6 @@ def post_running_status_reply(fbid, data):
         print(status.json())
 
 
-
-
 def defaultMessage(fbid):
     NormalMessage = "Hi! I am RailMitra. I help people to get there required train information"
     post_facebook_message_normal(fbid, NormalMessage)

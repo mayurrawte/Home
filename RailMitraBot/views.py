@@ -34,7 +34,7 @@ class RailMitraView(generic.View):
                             trainNo, Station = str(message['message']['text']).split()
                             command_type = 1
                         except ValueError:
-                            errmsg = "Hi! I am RailMitra. I help people to get there required train information. \n For more information send help \n Eg. help"
+                            railapi.defaultMessage(message['sender']['id'])
                             command_type = 0
                         if command_type:
                             data = json.loads(railapi.getStationsFromTrainNumber(trainNo))

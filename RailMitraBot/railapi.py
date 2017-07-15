@@ -49,8 +49,8 @@ def post_facebook_message_normal(fbid, recevied_message):
     status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data=response_msg)
     #print(status.json())
 
-def post_facebook_buttons(fbid, btnarr):  #this receives a array of facebook button json
-    response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"attachment": {"type": "template", "payload": {"template_type": "button", "text": "Select the Station", "buttons": btnarr}}}})
+def post_facebook_buttons(fbid, data):  #this receives a array of facebook button json
+    response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"attachment": {"type": "template", "payload": {"template_type": "button", "text": data['text'], "buttons": data['buttons']}}}})
     status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data=response_msg)
     #print(status.json())
 
@@ -62,6 +62,16 @@ def post_running_status_reply(fbid, data):
         return None
     else:
         rsData = {"recipient": {"id": fbid }, "message": {"attachment": {"type": "template", "payload": {"template_type": "generic", "elements": [{"title": resultData['trainName'] + " is "+ resultData['delayTime'] +" Arrival : "+ resultData['actArTime'][-5:] +" Actual : "+ resultData['schArTime'][-5:], "image_url": "http://toons.artie.com/gifs/arg-newtrain-crop.gif", "subtitle": resultData['lastLocation'] } ] } } } }
-    status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data=json.dumps(rsData))
-    print(status.json())
+        status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data=json.dumps(rsData))
+        print(status.json())
 
+
+
+
+def defaultMessage(fbid):
+    NormalMessage = "Hi! I am RailMitra. I help people to get there required train information"
+    post_facebook_message_normal(fbid, NormalMessage)
+    helpbtn = {"Buttons": [{"type": "postback", "title": "Help", "payload": "help"}]}
+    text = "For more information Reply with 'help' or click button below"
+    data = {"text": text, "buttons": helpbtn}
+    post_facebook_buttons(fbid, helpbtn)

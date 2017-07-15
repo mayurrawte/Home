@@ -24,6 +24,7 @@ def TrainRunningStatus(trainNo, jStation, jDate=datetime.date.today().strftime('
     data = {'trainNo': trainNo, 'jStation': jStation, 'jDate': jDate, 'jDateMap': jDate, 'jDateDay': jDateDay}
     r = requests.post('https://enquiry.indianrail.gov.in/mntes/q?opt=TrainRunning&subOpt=ShowRunC', data=data)
     soup = BeautifulSoup(r.text, 'lxml')
+    resultData = {}
     try:
         table = soup.find(id='ResTab')
         trs = table.find_all('tr')

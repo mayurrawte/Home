@@ -35,7 +35,7 @@ class RailMitraView(generic.View):
                         messageArgs = str(text).split()
                         messageArgsLen = len(messageArgs)
                         if messageArgsLen == 1:
-                            if messageArgs.strip().lower() == 'help':
+                            if str(messageArgs).strip().lower() == 'help':
                                 i_need_help(fbid)
                         elif messageArgsLen == 2:
                             trainNo, station = messageArgs[0], messageArgs[1]

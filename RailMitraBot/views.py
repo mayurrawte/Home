@@ -25,31 +25,25 @@ class RailMitraView(generic.View):
         #obj.write(json.dumps(incoming_message))
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
-                ob = open('lastlog.txt','w+')
+                ob = open('lastlog.txt', 'w+') #logging message
                 ob.write(json.dumps(message))
+                fbid = message['sender']['id']
                 command_type = 0
                 if 'message' in message:
                     if 'text' in message['message']:
-                        try:
-                            trainNo, Station = str(message['message']['text']).split()
-                            command_type = 1
-                        except ValueError:
-                            command_type = 0
-                        if command_type:
-                            data = json.loads(railapi.getStationsFromTrainNumber(trainNo))
-                            btnar = []
-                            ob = open('test.txt', 'w+')
-                            ob.write(json.dumps(data))
-                            def pps(k, v):
-                                payload = json.dumps({"jStation": k, "prevData": data['originalReq']})
-                                btnar.append({"type": "postback", "title": v, "payload": payload})
-                            [pps(k, v) for k, v in data['stations'].iteritems() if Station.lower() in v.lower()]
-                            if not btnar:
-                                railapi.post_facebook_message_normal(message['sender']['id'],"We did not find any related station with this train. Did you spell it correctly. Please try again ")
-                            else:
-                                railapi.post_running_status_reply(message['sender']['id'], btnar[0]['payload'])
+                        text = message['message']['text']
+                        messageArgs = str(text).split()
+                        messageArgsLen = len(messageArgs)
+                        if messageArgsLen == 1:
+                            if messageArgs.strip().lower() == 'help':
+                                i_need_help(fbid)
+                        elif messageArgsLen == 2:
+                            trainNo, station = messageArgs[0], messageArgs[1]
+                            running_status(fbid, trainNo, station)
+                        elif messageArgs == 3:
+                            railapi.post_facebook_message_normal(fbid,'Mayur is working hard to get you live station status')
                         else:
-                            railapi.defaultMessage(message['sender']['id'])
+                            railapi.defaultMessage(fbid)
                     else:
                         railapi.post_facebook_message_normal(message['sender']['id'], message['message']['attachments'])
                 elif 'postback' in message:
@@ -58,31 +52,22 @@ class RailMitraView(generic.View):
                     #railapi.postback_reply(message['sender']['id'], message['postback']['payload'])
         return HttpResponse()
 
+def running_status(fbid, trainNo, station):
+    data = json.loads(railapi.getStationsFromTrainNumber(trainNo))
+    btnar = []
+    ob = open('test.txt', 'w+')
+    ob.write(json.dumps(data))
+
+    def pps(k, v):
+        payload = json.dumps({"jStation": k, "prevData": data['originalReq']})
+        btnar.append({"type": "postback", "title": v, "payload": payload})
+
+    [pps(k, v) for k, v in data['stations'].iteritems() if station.lower() in v.lower()]
+    if not btnar:
+        railapi.post_facebook_message_normal(fbid,"We did not find any related station with this train. Did you spell it correctly. Please try again ")
+    else:
+        railapi.post_running_status_reply(fbid, btnar[0]['payload'])
 
 
-'''
-def postback_reply(fbid, data):
-    data = json.loads(data)
-    resultData = railapi.TrainRunningStatus(data['prevData']['trainNo'], data['jStation'], data['prevData']['jDate'], data['prevData']['jDateMap'], data['prevData']['jDateDay'])
-    post_message_url = 'https://graph.facebook.com/v2.9/me/messages?access_token=EAAcQ73ZA7PfgBALIekJFW8zudPg9XKdG7oNGA2aR33sRqKEppHrVBY5UCGsxNHqe2PyI4qRy9yoJa3UoUJ9NCvoPl5t6SLxV5OYmEX4GnHtZACX0SBq6N29YdVQLDTqX0SE1FfhDNSdxbWGEk1ZB9l1MC6DxZCqygNaROQF3IZA4pJd69rqvj'
-    rsData = {"recipient": {"id": fbid }, "message": {"attachment": {"type": "template", "payload": {"template_type": "generic", "elements": [{"title": resultData['trainName'] + " is "+ resultData['delayTime'] +" Arrival : "+ resultData['actArTime'][-5:] +" Actual : "+ resultData['schArTime'][-5:], "image_url": "http://toons.artie.com/gifs/arg-newtrain-crop.gif", "subtitle": resultData['lastLocation'] } ] } } } }
-    #response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"attachment": {"type": "template", "payload": {"template_type": "button", "text": "What do you want to do next?", "buttons": btnarr}}}})
-    status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=json.dumps(rsData))
-    print(status.json())
-
-
-def post_button(fbid, btnarr):
-    post_message_url = 'https://graph.facebook.com/v2.9/me/messages?access_token=EAAcQ73ZA7PfgBALIekJFW8zudPg9XKdG7oNGA2aR33sRqKEppHrVBY5UCGsxNHqe2PyI4qRy9yoJa3UoUJ9NCvoPl5t6SLxV5OYmEX4GnHtZACX0SBq6N29YdVQLDTqX0SE1FfhDNSdxbWGEk1ZB9l1MC6DxZCqygNaROQF3IZA4pJd69rqvj'
-    response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"attachment": {"type": "template", "payload": {"template_type": "button", "text": "Select the Station", "buttons": btnarr}}}})
-    status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
-    print(status.json())
-
-
-
-def post_facebook_message(fbid, recevied_message):
-    post_message_url = 'https://graph.facebook.com/v2.9/me/messages?access_token=EAAcQ73ZA7PfgBALIekJFW8zudPg9XKdG7oNGA2aR33sRqKEppHrVBY5UCGsxNHqe2PyI4qRy9yoJa3UoUJ9NCvoPl5t6SLxV5OYmEX4GnHtZACX0SBq6N29YdVQLDTqX0SE1FfhDNSdxbWGEk1ZB9l1MC6DxZCqygNaROQF3IZA4pJd69rqvj'
-    response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"text": recevied_message}})
-    status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
-    pprint(status.json())
-
-'''
+def i_need_help(fbid):
+    railapi.post_facebook_message_normal(fbid, "Ruk bhai karta hu teri madad")

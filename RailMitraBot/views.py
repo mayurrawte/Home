@@ -49,9 +49,8 @@ class RailMitraView(generic.View):
                     else:
                         railapi.post_facebook_message_normal(message['sender']['id'], message['message']['attachments'])
                 elif 'postback' in message:
-                    pass
-                    #left work
-                    #railapi.postback_reply(message['sender']['id'], message['postback']['payload'])
+                    if message['postback']['payload'].lower() == 'help':
+                        i_need_help(fbid)
         return HttpResponse()
 
 def running_status(fbid, trainNo, station):

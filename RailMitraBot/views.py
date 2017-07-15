@@ -46,15 +46,13 @@ class RailMitraView(generic.View):
                                 btnar.append({"type": "postback", "title": v, "payload": payload})
                             [pps(k, v) for k, v in data['stations'].iteritems() if Station.lower() in v.lower()]
                             if not btnar:
-                                railapi.post_facebook_message_normal(message['sender']['id'],
-                                                      "We did not find any related station with this train. Did you spell it correctly. Please try again ",
-                                                      1)
+                                railapi.post_facebook_message_normal(message['sender']['id'],"We did not find any related station with this train. Did you spell it correctly. Please try again ")
                             else:
                                 railapi.post_running_status_reply(message['sender']['id'], btnar[0]['payload'])
                         else:
-                            railapi.post_facebook_message_normal(message['sender']['id'], errmsg, 1)
+                            railapi.post_facebook_message_normal(message['sender']['id'], errmsg)
                     else:
-                        railapi.post_facebook_message_normal(message['sender']['id'], message['message']['attachments'], 2)
+                        railapi.post_facebook_message_normal(message['sender']['id'], message['message']['attachments'])
                 elif 'postback' in message:
                     pass
                     #left work

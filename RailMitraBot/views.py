@@ -44,18 +44,15 @@ class RailMitraView(generic.View):
                             errmsg = "Hi! Main Hu tumhara RailMitra. Train ki jaankari ke liye reply with \n TrainNumber <space> StationName \n Eg. 11057 Bhopal"
                             command_type = 0
                         if command_type:
-                            #data = json.loads(railapi.getStationsFromTrainNumber(trainNo))
-                            #btnar = []
-                            data = railapi.TrainRunningStatus(trainNo, Station)
+                            data = json.loads(railapi.getStationsFromTrainNumber(trainNo))
+                            btnar = []
                             ob = open('test.txt', 'w+')
                             ob.write(json.dumps(data))
-                            postback_reply(message['sender']['id'], message['postback']['payload'])
-                            #def pps(k, v):
-                            #    payload = json.dumps({"jStation": k, "prevData": data['originalReq']})
-                            #    btnar.append({"type": "postback", "title": v, "payload": payload})
-                            #[pps(k, v) for k, v in data['stations'].iteritems() if Station.lower() in v.lower()]
-                            #post_button(message['sender']['id'], btnar)
-                            #post_facebook_message(message['sender']['id'], message['message']['text'], 1)
+                            def pps(k, v):
+                                payload = json.dumps({"jStation": k, "prevData": data['originalReq']})
+                                btnar.append({"type": "postback", "title": v, "payload": payload})
+                            [pps(k, v) for k, v in data['stations'].iteritems() if Station.lower() in v.lower()]
+                            postback_reply(message['sender']['id'], btnar[0]['payload'])
                         else:
                             post_facebook_message(message['sender']['id'], errmsg, 1)
                     else:

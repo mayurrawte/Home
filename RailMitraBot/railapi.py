@@ -19,7 +19,7 @@ def getStationsFromTrainNumber(trainNo,jDate=datetime.date.today().strftime('%d-
     return json.dumps(finaldata)
 
 
-def TrainRunningStatus(trainNo, jStation, jDate=datetime.date.today().strftime('%d-%b-%Y'),jDateDay=str(datetime.date.today().strftime('%A')[:3]).upper()):
+def TrainRunningStatus(trainNo, jStation, jDate=datetime.date.today().strftime('%d-%b-%Y'), jDateMap=datetime.date.today().strftime('%d-%b-%Y'), jDateDay=str(datetime.date.today().strftime('%A')[:3]).upper()):
     data = {'trainNo': trainNo, 'jStation': jStation, 'jDate': jDate, 'jDateMap': jDate, 'jDateDay': jDateDay}
     r = requests.post('https://enquiry.indianrail.gov.in/mntes/q?opt=TrainRunning&subOpt=ShowRunC', data=data)
     soup = BeautifulSoup(r.text, 'lxml')

@@ -52,7 +52,12 @@ class RailMitraView(generic.View):
                                 payload = json.dumps({"jStation": k, "prevData": data['originalReq']})
                                 btnar.append({"type": "postback", "title": v, "payload": payload})
                             [pps(k, v) for k, v in data['stations'].iteritems() if Station.lower() in v.lower()]
-                            postback_reply(message['sender']['id'], btnar[0]['payload'])
+                            if not btnar:
+                                post_facebook_message(message['sender']['id'],
+                                                      "We did not find any related station with this train. Did you spell it correctly. Please try again ",
+                                                      1)
+                            else:
+                                postback_reply(message['sender']['id'], btnar[0]['payload'])
                         else:
                             post_facebook_message(message['sender']['id'], errmsg, 1)
                     else:

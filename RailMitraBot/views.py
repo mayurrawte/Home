@@ -9,7 +9,6 @@ from django.utils.decorators import method_decorator
 from django.views import generic
 
 
-
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
 
@@ -33,8 +32,6 @@ class RailMitraView(generic.View):
         obj.write(json.dumps(incoming_message))
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
-                # Check to make sure the received call is a message call
-                # This might be delivery, optin, postback for other events
                 ob = open('lastlog.txt','w+')
                 ob.write(json.dumps(message))
                 command_type = 0
@@ -47,15 +44,17 @@ class RailMitraView(generic.View):
                             errmsg = "Hi! Main Hu tumhara RailMitra. Train ki jaankari ke liye reply with \n TrainNumber <space> StationName \n Eg. 11057 Bhopal"
                             command_type = 0
                         if command_type:
-                            data = json.loads(railapi.getStationsFromTrainNumber(trainNo))
-                            btnar = []
+                            #data = json.loads(railapi.getStationsFromTrainNumber(trainNo))
+                            #btnar = []
+                            data = railapi.TrainRunningStatus(trainNo, Station)
                             ob = open('test.txt', 'w+')
                             ob.write(json.dumps(data))
-                            def pps(k, v):
-                                payload = json.dumps({"jStation": k, "prevData": data['originalReq']})
-                                btnar.append({"type": "postback", "title": v, "payload": payload})
-                            [pps(k, v) for k, v in data['stations'].iteritems() if Station.lower() in v.lower()]
-                            post_button(message['sender']['id'], btnar)
+                            postback_reply(message['sender']['id'], message['postback']['payload'])
+                            #def pps(k, v):
+                            #    payload = json.dumps({"jStation": k, "prevData": data['originalReq']})
+                            #    btnar.append({"type": "postback", "title": v, "payload": payload})
+                            #[pps(k, v) for k, v in data['stations'].iteritems() if Station.lower() in v.lower()]
+                            #post_button(message['sender']['id'], btnar)
                             #post_facebook_message(message['sender']['id'], message['message']['text'], 1)
                         else:
                             post_facebook_message(message['sender']['id'], errmsg, 1)

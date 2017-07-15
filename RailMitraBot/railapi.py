@@ -47,12 +47,13 @@ def TrainRunningStatus(trainNo, jStation, jDate=datetime.date.today().strftime('
 def post_facebook_message_normal(fbid, recevied_message):
     response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"text": recevied_message}})
     status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data=response_msg)
-    #print(status.json())
+    print(status.json())
 
 def post_facebook_buttons(fbid, data):  #this receives a array of facebook button json
-    response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"attachment": {"type": "template", "payload": {"template_type": "button", "text": data['text'], "buttons": data['buttons']}}}})
+    print data
+    response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"attachment": {"type": "template", "payload": {"template_type": "button", "text": data['text'], "buttons": data['Buttons']}}}})
     status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data=response_msg)
-    #print(status.json())
+    print(status.json())
 
 def post_running_status_reply(fbid, data):
     data = json.loads(data)
@@ -71,7 +72,6 @@ def post_running_status_reply(fbid, data):
 def defaultMessage(fbid):
     NormalMessage = "Hi! I am RailMitra. I help people to get there required train information"
     post_facebook_message_normal(fbid, NormalMessage)
-    helpbtn = {"Buttons": [{"type": "postback", "title": "Help", "payload": "help"}]}
     text = "For more information Reply with 'help' or click button below"
-    data = {"text": text, "buttons": helpbtn}
+    data = {"Buttons": [{"type": "postback", "title": "Help", "payload": "help"}], "text" : text}
     post_facebook_buttons(fbid, data)

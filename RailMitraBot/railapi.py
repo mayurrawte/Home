@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import datetime
 import collections
 
+page_url_with_token = 'https://graph.facebook.com/v2.9/me/messages?access_token=EAAcQ73ZA7PfgBALIekJFW8zudPg9XKdG7oNGA2aR33sRqKEppHrVBY5UCGsxNHqe2PyI4qRy9yoJa3UoUJ9NCvoPl5t6SLxV5OYmEX4GnHtZACX0SBq6N29YdVQLDTqX0SE1FfhDNSdxbWGEk1ZB9l1MC6DxZCqygNaROQF3IZA4pJd69rqvj'
 
 def getStationsFromTrainNumber(trainNo,jDate=datetime.date.today().strftime('%d-%b-%Y'),jDateDay=str(datetime.date.today().strftime('%A')[:3]).upper()):
     data = {'trainNo': trainNo, 'jDate': jDate, 'jDateMap': jDate,'jDateDay': jDateDay}
@@ -33,14 +34,25 @@ def TrainRunningStatus(trainNo, jStation, jDate=datetime.date.today().strftime('
     lastLocation = (trs[9].find_all('td')[1].text)
     lastLocation = " ".join(lastLocation.split())
     resultData = {'trainName': trainName, 'schArTime': schArTime, 'actArTime': actArTime, 'delayTime': delayTime, 'lastLocation': lastLocation, 'stationName': stationName}
-    #print resultData
     return resultData
 
 
-def post_facebook_message(fbid, btnarr):
-    post_message_url = 'https://graph.facebook.com/v2.9/me/messages?access_token=EAAcQ73ZA7PfgBALIekJFW8zudPg9XKdG7oNGA2aR33sRqKEppHrVBY5UCGsxNHqe2PyI4qRy9yoJa3UoUJ9NCvoPl5t6SLxV5OYmEX4GnHtZACX0SBq6N29YdVQLDTqX0SE1FfhDNSdxbWGEk1ZB9l1MC6DxZCqygNaROQF3IZA4pJd69rqvj'
-    #response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"text": "maakda nai chal raha"}})
-    response_msg = json.dumps({"recipient":{"id": fbid }, "message":{"attachment":{"type":"template", "payload":{"template_type":"button", "text":"What do you want to do next?", "buttons":btnarr } } } })
-    status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
+
+
+def post_facebook_message_normal(fbid, recevied_message):
+    response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"text": recevied_message}})
+    status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data=response_msg)
+    #print(status.json())
+
+def post_facebook_buttons(fbid, btnarr):  #this receives a array of facebook button json
+    response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"attachment": {"type": "template", "payload": {"template_type": "button", "text": "Select the Station", "buttons": btnarr}}}})
+    status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data=response_msg)
+    #print(status.json())
+
+def post_running_status_reply(fbid, data):
+    data = json.loads(data)
+    resultData = TrainRunningStatus(data['prevData']['trainNo'], data['jStation'], data['prevData']['jDate'], data['prevData']['jDateMap'], data['prevData']['jDateDay'])
+    rsData = {"recipient": {"id": fbid }, "message": {"attachment": {"type": "template", "payload": {"template_type": "generic", "elements": [{"title": resultData['trainName'] + " is "+ resultData['delayTime'] +" Arrival : "+ resultData['actArTime'][-5:] +" Actual : "+ resultData['schArTime'][-5:], "image_url": "http://toons.artie.com/gifs/arg-newtrain-crop.gif", "subtitle": resultData['lastLocation'] } ] } } } }
+    status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data=json.dumps(rsData))
     print(status.json())
 

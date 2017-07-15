@@ -74,4 +74,4 @@ def defaultMessage(fbid):
     helpbtn = {"Buttons": [{"type": "postback", "title": "Help", "payload": "help"}]}
     text = "For more information Reply with 'help' or click button below"
     data = {"text": text, "buttons": helpbtn}
-    post_facebook_buttons(fbid, helpbtn)
+    post_facebook_buttons(fbid, data)

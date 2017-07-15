@@ -24,16 +24,20 @@ def TrainRunningStatus(trainNo, jStation, jDate=datetime.date.today().strftime('
     data = {'trainNo': trainNo, 'jStation': jStation, 'jDate': jDate, 'jDateMap': jDate, 'jDateDay': jDateDay}
     r = requests.post('https://enquiry.indianrail.gov.in/mntes/q?opt=TrainRunning&subOpt=ShowRunC', data=data)
     soup = BeautifulSoup(r.text, 'lxml')
-    table = soup.find(id='ResTab')
-    trs = table.find_all('tr')
-    trainName = trs[0].find_all('td')[1].text
-    stationName = trs[1].find_all('td')[1].text
-    schArTime = trs[3].find_all('td')[1].text
-    actArTime = trs[4].find_all('td')[1].text
-    delayTime = trs[5].find_all('td')[1].text
-    lastLocation = (trs[9].find_all('td')[1].text)
-    lastLocation = " ".join(lastLocation.split())
-    resultData = {'trainName': trainName, 'schArTime': schArTime, 'actArTime': actArTime, 'delayTime': delayTime, 'lastLocation': lastLocation, 'stationName': stationName}
+    try:
+        table = soup.find(id='ResTab')
+        trs = table.find_all('tr')
+        trainName = trs[0].find_all('td')[1].text
+        stationName = trs[1].find_all('td')[1].text
+        schArTime = trs[3].find_all('td')[1].text
+        actArTime = trs[4].find_all('td')[1].text
+        delayTime = trs[5].find_all('td')[1].text
+        lastLocation = (trs[9].find_all('td')[1].text)
+        lastLocation = " ".join(lastLocation.split())
+        resultData = {'trainName': trainName, 'schArTime': schArTime, 'actArTime': actArTime, 'delayTime': delayTime, 'lastLocation': lastLocation, 'stationName': stationName}
+    except:
+        err = soup.find_all(class_='errorTextL11')[0].text
+        resultData['err'] = err
     return resultData
 
 
@@ -52,7 +56,10 @@ def post_facebook_buttons(fbid, btnarr):  #this receives a array of facebook but
 def post_running_status_reply(fbid, data):
     data = json.loads(data)
     resultData = TrainRunningStatus(data['prevData']['trainNo'], data['jStation'], data['prevData']['jDate'], data['prevData']['jDateMap'], data['prevData']['jDateDay'])
-    rsData = {"recipient": {"id": fbid }, "message": {"attachment": {"type": "template", "payload": {"template_type": "generic", "elements": [{"title": resultData['trainName'] + " is "+ resultData['delayTime'] +" Arrival : "+ resultData['actArTime'][-5:] +" Actual : "+ resultData['schArTime'][-5:], "image_url": "http://toons.artie.com/gifs/arg-newtrain-crop.gif", "subtitle": resultData['lastLocation'] } ] } } } }
+    if "err" in resultData:
+        post_facebook_message_normal(fbid, resultData['err'])
+    else:
+        rsData = {"recipient": {"id": fbid }, "message": {"attachment": {"type": "template", "payload": {"template_type": "generic", "elements": [{"title": resultData['trainName'] + " is "+ resultData['delayTime'] +" Arrival : "+ resultData['actArTime'][-5:] +" Actual : "+ resultData['schArTime'][-5:], "image_url": "http://toons.artie.com/gifs/arg-newtrain-crop.gif", "subtitle": resultData['lastLocation'] } ] } } } }
     status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data=json.dumps(rsData))
     print(status.json())
 

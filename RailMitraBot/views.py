@@ -20,12 +20,9 @@ class RailMitraView(generic.View):
         return generic.View.dispatch(self, request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        # Converts the text payload into a python dictionary
         incoming_message = json.loads(self.request.body.decode('utf-8'))
-        # Facebook recommends going through every entry since they might send
-        # multiple messages in a single call during high load
-        obj = open('incomingpostmessage.txt', 'w+')
-        obj.write(json.dumps(incoming_message))
+        #obj = open('incomingpostmessage.txt', 'w+') message loggin off
+        #obj.write(json.dumps(incoming_message))
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
                 ob = open('lastlog.txt','w+')
@@ -37,7 +34,7 @@ class RailMitraView(generic.View):
                             trainNo, Station = str(message['message']['text']).split()
                             command_type = 1
                         except ValueError:
-                            errmsg = "Hi! Main Hu tumhara RailMitra. Train ki jaankari ke liye reply with \n TrainNumber <space> StationName \n Eg. 11057 Bhopal"
+                            errmsg = "Hi! I am RailMitra. I help people to get there required train information. \n For more information send help \n Eg. help"
                             command_type = 0
                         if command_type:
                             data = json.loads(railapi.getStationsFromTrainNumber(trainNo))
@@ -65,6 +62,7 @@ class RailMitraView(generic.View):
         return HttpResponse()
 
 
+
 '''
 def postback_reply(fbid, data):
     data = json.loads(data)
@@ -81,6 +79,7 @@ def post_button(fbid, btnarr):
     response_msg = json.dumps({"recipient": {"id": fbid}, "message": {"attachment": {"type": "template", "payload": {"template_type": "button", "text": "Select the Station", "buttons": btnarr}}}})
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
     print(status.json())
+
 
 
 def post_facebook_message(fbid, recevied_message):

@@ -34,7 +34,6 @@ class RailMitraView(generic.View):
                             trainNo, Station = str(message['message']['text']).split()
                             command_type = 1
                         except ValueError:
-                            railapi.defaultMessage(message['sender']['id'])
                             command_type = 0
                         if command_type:
                             data = json.loads(railapi.getStationsFromTrainNumber(trainNo))
@@ -50,7 +49,7 @@ class RailMitraView(generic.View):
                             else:
                                 railapi.post_running_status_reply(message['sender']['id'], btnar[0]['payload'])
                         else:
-                            railapi.post_facebook_message_normal(message['sender']['id'], errmsg)
+                            railapi.defaultMessage(message['sender']['id'])
                     else:
                         railapi.post_facebook_message_normal(message['sender']['id'], message['message']['attachments'])
                 elif 'postback' in message:

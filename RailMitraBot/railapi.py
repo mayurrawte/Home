@@ -38,7 +38,7 @@ def TrainRunningStatus(trainNo, jStation, jDate=datetime.date.today().strftime('
         resultData = {'trainName': trainName, 'schArTime': schArTime, 'actArTime': actArTime, 'delayTime': delayTime, 'lastLocation': lastLocation, 'stationName': stationName}
     except:
         #err = soup.find_all(class_='errorTextL11')[0].text
-        resultData['err'] = 'some error in input please check that'
+        resultData['err'] = 'Either the Train Number' + trainNo + "does\'t run on " + jDateDay + " at " + jStation[-3:] + " or the train number is incorrect"
     return resultData
 
 

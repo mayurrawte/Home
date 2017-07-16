@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 import json
 import railapi
-import requests
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views import generic
@@ -32,8 +31,13 @@ class RailMitraView(generic.View):
                 if 'message' in message:
                     if 'text' in message['message']:
                         text = message['message']['text']
-                        messageArgs = str(text).split()
-                        messageArgsLen = len(messageArgs)
+                        try:
+                            messageArgs = str(text).split()
+                            messageArgsLen = len(messageArgs)
+                        except UnicodeEncodeError:
+                            railapi.post_facebook_message_normal(fbid, "Mere Maalik ne bass yahi sikhaya hai ")
+                            railapi.post_facebook_message_normal(fbid, '\U0001f601')
+                            return None
                         if messageArgsLen == 1:
                             if str(messageArgs[0]).strip().lower() == 'help':
                                 i_need_help(fbid)
@@ -41,10 +45,12 @@ class RailMitraView(generic.View):
                                 railapi.defaultMessage(fbid)
                         elif messageArgsLen == 2:
                             trainNo, station = messageArgs[0], messageArgs[1]
-
                             running_status(fbid, trainNo, station)
                         elif messageArgsLen == 3:
-                            railapi.post_facebook_message_normal(fbid,'Mayur is working hard to get you live station status')
+                            stationFrom, cmd , stationTo = messageArgs[0], messageArgs[1], messageArgs[2]
+                            if cmd.lower() == 'to':
+                                railapi.getStationNamesforliveStation(fbid, stationFrom, stationTo)
+                            #railapi.post_facebook_message_normal(fbid,'Mayur is working hard to get you live station status')
                         else:
                             railapi.defaultMessage(fbid)
                     else:

@@ -41,6 +41,7 @@ class RailMitraView(generic.View):
                                 railapi.defaultMessage(fbid)
                         elif messageArgsLen == 2:
                             trainNo, station = messageArgs[0], messageArgs[1]
+
                             running_status(fbid, trainNo, station)
                         elif messageArgsLen == 3:
                             railapi.post_facebook_message_normal(fbid,'Mayur is working hard to get you live station status')
@@ -72,3 +73,9 @@ def running_status(fbid, trainNo, station):
 
 def i_need_help(fbid):
     railapi.post_facebook_message_normal(fbid, "Ruk bhai karta hu teri madad")
+    rsData = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
+                                                                    "payload": {"template_type": "generic",
+                                                                                "elements": [{"title": "For getting running status of a train reply with : 'trainNumber<space>stationName",
+                                                                                              "image_url": "http://toons.artie.com/gifs/arg-newtrain-crop.gif",
+                                                                                              "subtitle": "Example : 11057 Bhopal"}]}}}}
+    railapi.post_generic_template(rsData)

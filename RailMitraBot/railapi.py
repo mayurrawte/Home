@@ -69,14 +69,20 @@ def post_running_status_reply(fbid, data):
 
 def post_generic_template(data):
     #rsData = {"recipient": {"id": fbid }, "message": {"attachment": {"type": "template", "payload": {"template_type": "generic", "elements": [{"title": resultData['trainName'] + " is "+ resultData['delayTime'] +" Arrival : "+ resultData['actArTime'][-5:] +" Actual : "+ resultData['schArTime'][-5:], "image_url": "http://toons.artie.com/gifs/arg-newtrain-crop.gif", "subtitle": resultData['lastLocation'] } ] } } } }
-    print data
     status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data=json.dumps(data))
     print(status.json())
 
 
 def defaultMessage(fbid):
-    NormalMessage = "Hi! I am RailMitra. I help people to get there required train information"
+    NormalMessage = "Hi! I am RailMitra. I help people to get there required train information."
     post_facebook_message_normal(fbid, NormalMessage)
+    rsData = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
+                                                                    "payload": {"template_type": "generic",
+                                                                                "elements": [{
+                                                                                                 "title": "Simran Could have missed her train. Coz She did't ask RailMitra",
+                                                                                                 "image_url": "http://static.dnaindia.com/sites/default/files/2014/11/29/288247-ddlj-1.jpg",
+                                                                                                 "subtitle": "Simran Was not Smart but you are !"}]}}}}
+    post_generic_template(rsData)
     text = "For more information Reply with 'help' or click button below"
     data = {"Buttons": [{"type": "postback", "title": "Help", "payload": "help"}], "text" : text}
     post_facebook_buttons(fbid, data)

@@ -72,10 +72,10 @@ def running_status(fbid, trainNo, station):
 
 
 def i_need_help(fbid):
-    railapi.post_facebook_message_normal(fbid, "Ruk bhai karta hu teri madad")
+    #railapi.post_facebook_message_normal(fbid, "Ruk bhai karta hu teri madad")
     rsData = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
                                                                     "payload": {"template_type": "generic",
-                                                                                "elements": [{"title": "For getting running status of a train reply with : 'trainNumber<space>stationName",
-                                                                                              "image_url": "http://toons.artie.com/gifs/arg-newtrain-crop.gif",
-                                                                                              "subtitle": "Example : 11057 Bhopal"}]}}}}
+                                                                                "elements": [{"title": "trainNumber <space> stationName , Example : 11057 Bhopal",
+                                                                                              "image_url": "https://is02.ezphotoshare.com/2017/07/16/snFSRa.jpg",
+                                                                                              "subtitle": "For running status of train"}]}}}}
     railapi.post_generic_template(rsData)

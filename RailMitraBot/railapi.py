@@ -68,9 +68,10 @@ def post_running_status_reply(fbid, data):
 
 
 def post_generic_template(data):
-    data = json.load(data)
-    status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data = data)
-    print status.json()
+    #rsData = {"recipient": {"id": fbid }, "message": {"attachment": {"type": "template", "payload": {"template_type": "generic", "elements": [{"title": resultData['trainName'] + " is "+ resultData['delayTime'] +" Arrival : "+ resultData['actArTime'][-5:] +" Actual : "+ resultData['schArTime'][-5:], "image_url": "http://toons.artie.com/gifs/arg-newtrain-crop.gif", "subtitle": resultData['lastLocation'] } ] } } } }
+    print data
+    status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data=json.dumps(data))
+    print(status.json())
 
 
 def defaultMessage(fbid):

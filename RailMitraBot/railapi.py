@@ -107,7 +107,7 @@ def getLiveStation(fbid, stationFrom, stationTo):
     r = requests.post(url, headers={"Content-Type":"application/x-www-form-urlencoded"},data=data)
     soup = BeautifulSoup(r.text, 'lxml')
     trs = soup.find('tbody').find_all('tr')
-    post_facebook_message_normal(fbid, "There are "+ len(trs)-2 + " trains in next 4 hours between "+ stationFrom + " and "+ stationTo)
+    post_facebook_message_normal(fbid, "There are "+ str(len(trs)-2) + " trains in next 4 hours between "+ stationFrom + " and "+ stationTo)
     for i in range(2,len(trs)):
         trainName = trs[i].find_all('td')[0].text
         trainArr, trainDep = (trs[i].find_all('td')[1].text).split()

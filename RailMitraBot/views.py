@@ -87,3 +87,11 @@ def i_need_help(fbid):
                                                                                               "image_url": "https://is02.ezphotoshare.com/2017/07/16/snFSRa.jpg",
                                                                                               "subtitle": "For running status of train"}]}}}}
     railapi.post_generic_template(rsData)
+
+    rsData = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
+                                                                    "payload": {"template_type": "generic",
+                                                                                "elements": [{
+                                                                                                 "title": "FromStation <space> to <space> ToStation , Example : Bhopal to Burhanpur",
+                                                                                                 "image_url": "https://ci.memecdn.com/9785823.jpg",
+                                                                                                 "subtitle": "For Train between these station in next 4 hours"}]}}}}
+    railapi.post_generic_template(rsData)

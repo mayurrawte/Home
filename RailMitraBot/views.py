@@ -24,20 +24,15 @@ class RailMitraView(generic.View):
         #obj.write(json.dumps(incoming_message))
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
-                ob = open('lastlog.txt', 'w+') #logging message
+                ob = open('lastlog.txt', 'w+')  # logging message
                 ob.write(json.dumps(message))
                 fbid = message['sender']['id']
                 command_type = 0
                 if 'message' in message:
                     if 'text' in message['message']:
                         text = message['message']['text']
-                        try:
-                            messageArgs = str(text).split()
-                            messageArgsLen = len(messageArgs)
-                        except UnicodeEncodeError:
-                            railapi.post_facebook_message_normal(fbid, "Mere Maalik ne bass yahi sikhaya hai ")
-                            railapi.post_facebook_message_normal(fbid, '\U0001f601')
-                            return HttpResponse()
+                        messageArgs = str(text).split()
+                        messageArgsLen = len(messageArgs)
                         if messageArgsLen == 1:
                             if str(messageArgs[0]).strip().lower() == 'help':
                                 i_need_help(fbid)
@@ -47,10 +42,10 @@ class RailMitraView(generic.View):
                             trainNo, station = messageArgs[0], messageArgs[1]
                             running_status(fbid, trainNo, station)
                         elif messageArgsLen == 3:
-                            stationFrom, cmd , stationTo = messageArgs[0], messageArgs[1], messageArgs[2]
+                            stationFrom, cmd, stationTo = messageArgs[0], messageArgs[1], messageArgs[2]
                             if cmd.lower() == 'to':
-                                railapi.getStationNamesforliveStation(fbid, stationFrom, stationTo)
-                            #railapi.post_facebook_message_normal(fbid,'Mayur is working hard to get you live station status')
+                                railapi.getStationNamesforliveStation(fbid, stationFrom, stationTo, 1)
+                                # railapi.post_facebook_message_normal(fbid,'Mayur is working hard to get you live station status')
                         else:
                             railapi.defaultMessage(fbid)
                     else:
@@ -58,6 +53,13 @@ class RailMitraView(generic.View):
                 elif 'postback' in message:
                     if message['postback']['payload'].lower() == 'help':
                         i_need_help(fbid)
+                    else:
+                        data = json.loads(message['postback']['payload'])
+                        if 'validStationFrom' in data and not 'validStationTo' in data:
+                            railapi.getStationNamesforliveStation(fbid, data['validStationFrom'], data['stationTo'], 2)
+                        elif 'validStationFrom' in data and 'validStationTo' in data:
+                            railapi.getLiveStation(fbid, data['validStationFrom'], data['validStationTo'])
+                            # railapi.getStationNamesforliveStation(fbid, data['stationTo'])
         return HttpResponse()
 
 def running_status(fbid, trainNo, station):

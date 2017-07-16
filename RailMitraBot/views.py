@@ -37,7 +37,7 @@ class RailMitraView(generic.View):
                         except UnicodeEncodeError:
                             railapi.post_facebook_message_normal(fbid, "Mere Maalik ne bass yahi sikhaya hai ")
                             railapi.post_facebook_message_normal(fbid, '\U0001f601')
-                            return None
+                            return HttpResponse()
                         if messageArgsLen == 1:
                             if str(messageArgs[0]).strip().lower() == 'help':
                                 i_need_help(fbid)

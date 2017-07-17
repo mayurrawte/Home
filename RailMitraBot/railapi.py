@@ -90,6 +90,7 @@ def getStationNamesforliveStation(fbid, stationFrom, stationTo, type):
         getStationFromList = [station for station in LiveStationList if stationFrom.upper() in station]
         btnarr = []
         if len(getStationFromList) > 0:
+            isinit = 1
             for station in getStationFromList:
                 btnarr.append({"type": "postback", "title": station, "payload": json.dumps({"PBRType": "livestation", "validStationFrom": station, "stationTo" : stationTo})})
             morestations = split(btnarr,3)

@@ -144,8 +144,11 @@ def getLiveStation(fbid, stationFrom, stationTo):
             status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data=json.dumps(rsData))
             print status.json()
     except:
-        err = soup.find_all(class_='errorTextL11')[0]
-        post_facebook_message_normal(fbid, err.text)
+        try:
+            err = soup.find_all(class_='errorTextL11')[0]
+            post_facebook_message_normal(fbid, err.text)
+        except:
+            post_facebook_message_normal(fbid, "Server Error please try after some time")
 
 
 

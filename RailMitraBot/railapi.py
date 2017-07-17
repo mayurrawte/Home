@@ -90,7 +90,6 @@ def getStationNamesforliveStation(fbid, stationFrom, stationTo, type):
         getStationFromList = [station for station in LiveStationList if stationFrom.upper() in station]
         btnarr = []
         if len(getStationFromList) > 0:
-            isinit = 1
             for station in getStationFromList:
                 btnarr.append({"type": "postback", "title": station, "payload": json.dumps({"PBRType": "livestation", "validStationFrom": station, "stationTo" : stationTo})})
             morestations = split(btnarr,3)
@@ -132,16 +131,22 @@ def getLiveStation(fbid, stationFrom, stationTo):
     data = 'jFromStationInput='+stationFrom+'&jToStationInput='+stationTo+'&nHr=4&jStnName=&jStation='
     r = requests.post(url, headers={"Content-Type":"application/x-www-form-urlencoded"},data=data)
     soup = BeautifulSoup(r.text, 'lxml')
-    trs = soup.find('tbody').find_all('tr')
-    post_facebook_message_normal(fbid, "There are "+ str(len(trs)-2) + " trains in next 4 hours between "+ stationFrom + " and "+ stationTo)
-    for i in range(2,len(trs)):
-        trainName = trs[i].find_all('td')[0].text
-        trainArr, trainDep = (trs[i].find_all('td')[1].text).split()
-        atrainArr, atrainDep = (trs[i].find_all('td')[2].text).split()
-        platform = trs[i].find_all('td')[3].text
-        rsData = {"recipient": {"id": fbid }, "message": {"attachment": {"type": "template", "payload": {"template_type": "generic", "elements": [{"title": trainName + " will Arrive at "+ atrainArr +" on platform number "+ platform, "image_url": "", "subtitle": "Sample" } ] } } } }
-        status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data=json.dumps(rsData))
-        print status.json()
+    try:
+        trs = soup.find('tbody').find_all('tr')
+        post_facebook_message_normal(fbid, "There are "+ str(len(trs)-2) + " trains in next 4 hours between "+ stationFrom + " and "+ stationTo)
+        for i in range(2,len(trs)):
+            trainName = trs[i].find_all('td')[0].text
+            trainArr, trainDep = (trs[i].find_all('td')[1].text).split()
+            atrainArr, atrainDep = (trs[i].find_all('td')[2].text).split()
+            platform = trs[i].find_all('td')[3].text
+            rsData = {"recipient": {"id": fbid }, "message": {"attachment": {"type": "template", "payload": {"template_type": "generic", "elements": [{"title": trainName + " will Arrive at "+ atrainArr +" on platform number "+ platform, "image_url": "", "subtitle": "Sample" } ] } } } }
+            status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data=json.dumps(rsData))
+            print status.json()
+    except:
+        err = soup.find_all(class_='errorTextL11')[0]
+        post_facebook_message_normal(fbid, err.text)
+
+
 
 
 #for slpliting the button array

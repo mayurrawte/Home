@@ -40,9 +40,9 @@ class RailMitraView(generic.View):
                         elif messageArgsLen == 2:
                             try:
                                 trainNo, station = int(messageArgs[0]), messageArgs[1]
+                                running_status(fbid, trainNo, station)
                             except ValueError:
                                 railapi.post_facebook_message_normal(fbid, "Seems like you are trying to talk to me . I am actually tryping to figure out how humans have conversations. Till then i can only help with train informations. Type 'help' for more information")
-                            running_status(fbid, trainNo, station)
                         elif messageArgsLen == 3:
                             stationFrom, cmd, stationTo = messageArgs[0], messageArgs[1], messageArgs[2]
                             if cmd.lower() == 'to':

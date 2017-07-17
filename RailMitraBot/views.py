@@ -30,8 +30,13 @@ class RailMitraView(generic.View):
                 if 'message' in message:
                     if 'text' in message['message']:
                         text = message['message']['text']
-                        messageArgs = str(text).split()
-                        messageArgsLen = len(messageArgs)
+                        try:
+                            messageArgs = str(text).split()
+                            messageArgsLen = len(messageArgs)
+                        except UnicodeEncodeError:
+                            railapi.post_facebook_message_normal(fbid, "Mujhe bass ek hi smiley sikhaye gayi hai  ")
+                            railapi.post_facebook_message_normal(fbid, '\U0001f601')
+                            return HttpResponse()
                         if messageArgsLen == 1:
                             if str(messageArgs[0]).strip().lower() == 'help':
                                 i_need_help(fbid)

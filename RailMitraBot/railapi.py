@@ -92,23 +92,37 @@ def getStationNamesforliveStation(fbid, stationFrom, stationTo, type):
         if len(getStationFromList) > 0:
             for station in getStationFromList:
                 btnarr.append({"type": "postback", "title": station, "payload": json.dumps({"PBRType": "livestation", "validStationFrom": station, "stationTo" : stationTo})})
-                data = {"text": "Select From Station ", "Buttons": btnarr}
+            morestations = split(btnarr,3)
+            for buttons in morestations:
+                if isinit:
+                    data = {"text": "Select any one Source Station ", "Buttons" : buttons}
+                    isinit = 0
+                else:
+                    data = {"text": "Or Select from these Similar Station Name", "Buttons" : buttons}
+                post_facebook_buttons(fbid, data)
         else: 
             post_facebook_message_normal(fbid,"No Station Found named "+ stationFrom + ". Try spelling it correctly")
-            err = 1
     elif type == 2:
         cnfStation = stationFrom
         getStationToList = [station for station in LiveStationList if stationTo.upper() in station]
         btnarr = []
         if len(getStationToList) > 0:
+            isinit = 1
             for station in getStationToList:
                 btnarr.append({"type": "postback", "title": station, "payload": json.dumps({"PBRType": "livestation", "validStationFrom": cnfStation, "validStationTo": station})})
-                data = {"text": "Select To Station ", "Buttons": btnarr}
+            morestations = split(btnarr,3)
+            for buttons in morestations:
+                if isinit:
+                    data = {"text": "Select any one Destination Station  ", "Buttons": buttons}
+                    isinit = 0
+                else:
+                    data = {"text": "or Select from these similar station name  ", "Buttons": buttons}
+                post_facebook_buttons(fbid, data)
         else:
             post_facebook_message_normal(fbid,"No Station Found named "+ stationFrom + ". Try spelling it correctly")
-            err = 1
-    if not err:
-        post_facebook_buttons(fbid, data)
+        
+        #print data
+        #post_facebook_buttons(fbid, data)
         #post_facebook_buttons(fbid, data)
     #getStationToList = [station for station in LiveStationList if stationTo.upper() in station]
 
@@ -127,3 +141,14 @@ def getLiveStation(fbid, stationFrom, stationTo):
         rsData = {"recipient": {"id": fbid }, "message": {"attachment": {"type": "template", "payload": {"template_type": "generic", "elements": [{"title": trainName + " will Arrive at "+ atrainArr +" on platform number "+ platform, "image_url": "", "subtitle": "Sample" } ] } } } }
         status = requests.post(page_url_with_token, headers={"Content-Type": "application/json"}, data=json.dumps(rsData))
         print status.json()
+
+
+#for slpliting the button array
+def split(arr, size):
+     arrs = []
+     while len(arr) > size:
+         pice = arr[:size]
+         arrs.append(pice)
+         arr   = arr[size:]
+     arrs.append(arr)
+     return arrs

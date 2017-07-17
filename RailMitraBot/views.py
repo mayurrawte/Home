@@ -53,7 +53,7 @@ class RailMitraView(generic.View):
                             if cmd.lower() == 'to':
                                 railapi.getStationNamesforliveStation(fbid, stationFrom, stationTo, 1)
                             else:
-                                railapi.post_facebook_message_normal(fbid, "I am trying to figure out how humans actually talk. Till then i can only help with train informations. Type 'help' for more information")
+                                railapi.post_facebook_message_normal(fbid, "I don't have feelings so stop talking to me as humans"+'\U0001f601'+" . For more information type 'help' ")
                         else:
                             railapi.defaultMessage(fbid)
                     else:

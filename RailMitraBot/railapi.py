@@ -85,20 +85,31 @@ def defaultMessage(fbid):
 
 
 def getStationNamesforliveStation(fbid, stationFrom, stationTo, type):
+    err = 0
     if type == 1:
         getStationFromList = [station for station in LiveStationList if stationFrom.upper() in station]
         btnarr = []
-        for station in getStationFromList:
-            btnarr.append({"type": "postback", "title": station, "payload": json.dumps({"PBRType": "livestation", "validStationFrom": station, "stationTo" : stationTo})})
-            data = {"text": "Select From Station ", "Buttons": btnarr}
+        if len(getStationFromList) > 0:
+            for station in getStationFromList:
+                btnarr.append({"type": "postback", "title": station, "payload": json.dumps({"PBRType": "livestation", "validStationFrom": station, "stationTo" : stationTo})})
+                data = {"text": "Select From Station ", "Buttons": btnarr}
+        else: 
+            post_facebook_message_normal(fbid,"No Station Found named "+ stationFrom + ". Try spelling it correctly")
+            err = 1
     elif type == 2:
         cnfStation = stationFrom
         getStationToList = [station for station in LiveStationList if stationTo.upper() in station]
         btnarr = []
-        for station in getStationToList:
-            btnarr.append({"type": "postback", "title": station, "payload": json.dumps({"PBRType": "livestation", "validStationFrom": cnfStation, "validStationTo": station})})
-            data = {"text": "Select To Station ", "Buttons": btnarr}
-    post_facebook_buttons(fbid, data)
+        if len(getStationFromList) > 0:
+            for station in getStationToList:
+                btnarr.append({"type": "postback", "title": station, "payload": json.dumps({"PBRType": "livestation", "validStationFrom": cnfStation, "validStationTo": station})})
+                data = {"text": "Select To Station ", "Buttons": btnarr}
+        else:
+            post_facebook_message_normal(fbid,"No Station Found named "+ stationFrom + ". Try spelling it correctly")
+            err = 1
+    if not err:
+        post_facebook_buttons(fbid, data)
+        #post_facebook_buttons(fbid, data)
     #getStationToList = [station for station in LiveStationList if stationTo.upper() in station]
 
 def getLiveStation(fbid, stationFrom, stationTo):
@@ -107,7 +118,7 @@ def getLiveStation(fbid, stationFrom, stationTo):
     r = requests.post(url, headers={"Content-Type":"application/x-www-form-urlencoded"},data=data)
     soup = BeautifulSoup(r.text, 'lxml')
     trs = soup.find('tbody').find_all('tr')
-    post_facebook_message_normal(fbid, "There are "+ str(len(trs)-2) + " trains in next 4 hours between "+ stationFrom + " and "+ stationTo)
+    post_facebook_message_normal(fbid, "There are "+ len(trs)-2 + " trains in next 4 hours between "+ stationFrom + " and "+ stationTo)
     for i in range(2,len(trs)):
         trainName = trs[i].find_all('td')[0].text
         trainArr, trainDep = (trs[i].find_all('td')[1].text).split()

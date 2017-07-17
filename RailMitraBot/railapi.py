@@ -100,7 +100,7 @@ def getStationNamesforliveStation(fbid, stationFrom, stationTo, type):
         cnfStation = stationFrom
         getStationToList = [station for station in LiveStationList if stationTo.upper() in station]
         btnarr = []
-        if len(getStationFromList) > 0:
+        if len(getStationToList) > 0:
             for station in getStationToList:
                 btnarr.append({"type": "postback", "title": station, "payload": json.dumps({"PBRType": "livestation", "validStationFrom": cnfStation, "validStationTo": station})})
                 data = {"text": "Select To Station ", "Buttons": btnarr}

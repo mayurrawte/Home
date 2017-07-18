@@ -1,11 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import json
+
+from django.shortcuts import render
+
 import railapi
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
+
+def privacypolicy(request):
+    return render(request, 'privacypolicyrailmitra.html', context={})
 
 class RailMitraView(generic.View):
     def get(self, request, *args, **kwargs):

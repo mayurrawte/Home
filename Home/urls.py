@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^$', include('IndexApp.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^fb_AiSHA/', include('AiSHABot.urls')),
-    url(r'^railmitra/', include('RailMitraBot.urls'))
+    url(r'^railmitra/', include('RailMitraBot.urls')),
+    url(r'^trafficguru/', include('TrafficGuru.urls'))
 ]

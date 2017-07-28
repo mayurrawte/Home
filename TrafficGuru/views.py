@@ -40,7 +40,7 @@ class TrafficGuruView(generic.View):
                         custresponse = 'Bass karta hu start'
                     else:
                         custresponse = 'Ruko ! mujhe sikhne de fir tumhe sikhaata hu'
-                    post_facebook_message(message['sender']['id'], custresponse)
+                    post_facebook_message(message['sender']['id'], custresponse, 1)
         return HttpResponse()
 
 def post_facebook_message(fbid, recevied_message,mtype):

@@ -8,11 +8,7 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
-import apiai
 
-
-apiaitoken = '8869181575044c7ba1b6b194087c4dc9'
-ai = apiai.ApiAI(apiaitoken)
 
 class TrafficGuruView(generic.View):
     def get(self, request, *args, **kwargs):
@@ -25,25 +21,26 @@ class TrafficGuruView(generic.View):
     def dispatch(self, request, *args, **kwargs):
         return generic.View.dispatch(self, request, *args, **kwargs)
 
-    # Post function to handle Facebook messages
     def post(self, request, *args, **kwargs):
         incoming_message = json.loads(self.request.body.decode('utf-8'))
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
                 if 'message' in message:
-                    pprint(message)
-                    obj = open('test.txt', 'w+')
+                    obj = open('traffictest.txt', 'w+')
                     obj.write(str(message))
                     if 'text' in message['message']:
-                        airequest = ai.text_request()
-                        airequest.session_id = message['sender']['id']
-                        airequest.query = message['message']['text']
-                        airesponse = airequest.getresponse()
-                        airesponsetext = json.loads(airesponse.read())['result']['fulfillment']['messages'][0]['speech']
+                        data = 'heh'
                         #post_facebook_message(message['sender']['id'], message['message']['text'], 1)
-                        post_facebook_message(message['sender']['id'], airesponsetext, 1)
+                        post_facebook_message(message['sender']['id'], data, 1)
                     else:
                         post_facebook_message(message['sender']['id'], message['message']['attachments'], 2)
+                elif 'postback' in message:
+                    text = message['postback']['payload']
+                    if text == 'GET_STARTED_PAYLOAD':
+                        custresponse = 'Bass karta hu start'
+                    else:
+                        custresponse = 'Ruko ! mujhe sikhne de fir tumhe sikhaata hu'
+                    post_facebook_message(message['sender']['id'], custresponse)
         return HttpResponse()
 
 def post_facebook_message(fbid, recevied_message,mtype):

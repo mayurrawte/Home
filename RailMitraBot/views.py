@@ -9,9 +9,15 @@ from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
+import apiai
+
+token = '5e47a85828a0400aa52a591ca95820f1'
+ai = apiai.ApiAI(token)
+
 
 def privacypolicy(request):
     return render(request, 'privacypolicyrailmitra.html', context={})
+
 
 class RailMitraView(generic.View):
     def get(self, request, *args, **kwargs):
@@ -36,6 +42,14 @@ class RailMitraView(generic.View):
                 if 'message' in message:
                     if 'text' in message['message']:
                         text = message['message']['text']
+                        airequest = ai.text_request()
+                        airequest.session_id = fbid
+                        airequest.query = text
+                        airesponse = airequest.getresponse()
+                        airesponsetext = json.loads(airesponse.read())['result']['fulfillment']['messages'][0]['speech']
+                        if airesponsetext['result']['metadata']['intentName'] == 'LiveStation':
+                            railapi.getStationNamesforliveStation(fbid, airesponsetext['result']['parameters']['sourceStation'], airesponsetext['result']['parameters']['DestinationStation'], 1)
+
                         try:
                             messageArgs = str(text).split()
                             messageArgsLen = len(messageArgs)

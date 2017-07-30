@@ -9,6 +9,8 @@ from django.utils.decorators import method_decorator
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
 
+trafficSignals = {'1': {'image': 'url1.png', 'instruction': 'SomeRandomInstructions'}}
+
 
 class TrafficGuruView(generic.View):
     def get(self, request, *args, **kwargs):
@@ -37,7 +39,7 @@ class TrafficGuruView(generic.View):
                 elif 'postback' in message:
                     text = message['postback']['payload']
                     if text == 'GET_STARTED_PAYLOAD':
-                        custresponse = 'Bass karta hu start'
+                        custresponse = 'Hi! Nice to see you here. I am TrafficGuru. Yeah Thats what my friends call me coz i know everything about traffic, and probably you are here to get some knowledge about traffic signals. No worries i will master you in that. So lets Start.'
                     else:
                         custresponse = 'Ruko ! mujhe sikhne de fir tumhe sikhaata hu'
                     post_facebook_message(message['sender']['id'], custresponse, 1)
@@ -49,6 +51,8 @@ def post_facebook_message(fbid, recevied_message,mtype):
         response_msg = json.dumps({"recipient":{"id":fbid}, "message": {"text":recevied_message}})
     elif mtype == 2:
         response_msg = json.dumps({"message": {"attachment": {"type": "image", "payload": {"url": "https://scontent.xx.fbcdn.net/v/t39.1997-6/p100x100/851587_369239346556147_162929011_n.png?_nc_ad=z-m&oh=ad2a1e37edd885afb4acd987ad8e33c6&oe=59DEDBB0"}}}, "recipient": {"id": "1346441788784848"}})
+    elif mtype == 3:
+        response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"attachment":{"type":"template", "payload":{"template_type":"button", "text":"I am so excited about this. ", "buttons":[{"type":"postback", "title":"So lets start..", "payload":"signal1"}]}}}})
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
     pprint(status.json())
 

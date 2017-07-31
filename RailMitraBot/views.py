@@ -47,10 +47,13 @@ class RailMitraView(generic.View):
                         airequest.query = text
                         airesponse = airequest.getresponse()
                         airesponsetext = json.loads(airesponse.read())
-                        if airesponsetext['result']['metadata']['intentName'] == 'LiveStation':
-                            railapi.getStationNamesforliveStation(fbid, airesponsetext['result']['parameters']['sourceStation'], airesponsetext['result']['parameters']['DestinationStation'], 1)
-                        elif airesponsetext['result']['metadata']['intentName'] == 'TrainStatus':
-                            running_status(fbid, airesponsetext['result']['parameters']['trainNumber'], airesponsetext['result']['parameters']['boardingStation'])
+                        try:
+                            if airesponsetext['result']['metadata']['intentName'] == 'LiveStation':
+                                railapi.getStationNamesforliveStation(fbid, airesponsetext['result']['parameters']['sourceStation'], airesponsetext['result']['parameters']['DestinationStation'], 1)
+                            elif airesponsetext['result']['metadata']['intentName'] == 'TrainStatus':
+                                running_status(fbid, airesponsetext['result']['parameters']['trainNumber'], airesponsetext['result']['parameters']['boardingStation'])
+                        except:
+                            pass
                         try:
                             messageArgs = str(text).split()
                             messageArgsLen = len(messageArgs)
@@ -61,8 +64,6 @@ class RailMitraView(generic.View):
                         if messageArgsLen == 1:
                             if str(messageArgs[0]).strip().lower() == 'help':
                                 i_need_help(fbid)
-                            else:
-                                railapi.defaultMessage(fbid)
                         else:
                             railapi.post_facebook_message_normal(fbid, airesponsetext['result']['fulfillment']['speech'])
                     else:

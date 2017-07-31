@@ -63,20 +63,8 @@ class RailMitraView(generic.View):
                                 i_need_help(fbid)
                             else:
                                 railapi.defaultMessage(fbid)
-                        elif messageArgsLen == 2:
-                            try:
-                                trainNo, station = int(messageArgs[0]), messageArgs[1]
-                                running_status(fbid, trainNo, station)
-                            except ValueError:
-                                railapi.post_facebook_message_normal(fbid, "Seems like you are trying to talk to me . I am actually tryping to figure out how humans have conversations. Till then i can only help with train informations. Type 'help' for more information")
-                        elif messageArgsLen == 3:
-                            stationFrom, cmd, stationTo = messageArgs[0], messageArgs[1], messageArgs[2]
-                            if cmd.lower() == 'to':
-                                railapi.getStationNamesforliveStation(fbid, stationFrom, stationTo, 1)
-                            else:
-                                railapi.post_facebook_message_normal(fbid, "I don't have feelings so stop talking to me as humans  "+'\U0001f601'+" For more information type 'help' ")
                         else:
-                            railapi.defaultMessage(fbid)
+                            railapi.post_facebook_message_normal(fbid, airesponsetext['result']['fulfillment']['speech'])
                     else:
                         railapi.post_facebook_message_normal(message['sender']['id'], message['message']['attachments'])
                 elif 'postback' in message:

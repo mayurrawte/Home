@@ -46,10 +46,11 @@ class RailMitraView(generic.View):
                         airequest.session_id = fbid
                         airequest.query = text
                         airesponse = airequest.getresponse()
-                        airesponsetext = json.loads(airesponse.read())['result']['fulfillment']['messages'][0]['speech']
+                        airesponsetext = json.loads(airesponse.read())
                         if airesponsetext['result']['metadata']['intentName'] == 'LiveStation':
                             railapi.getStationNamesforliveStation(fbid, airesponsetext['result']['parameters']['sourceStation'], airesponsetext['result']['parameters']['DestinationStation'], 1)
-
+                        elif airesponsetext['result']['metadata']['intentName'] == 'TrainStatus':
+                            running_status(fbid, airesponsetext['result']['parameters']['trainNumber'], airesponsetext['result']['parameters']['boardingStation'])
                         try:
                             messageArgs = str(text).split()
                             messageArgsLen = len(messageArgs)

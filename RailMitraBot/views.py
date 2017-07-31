@@ -102,15 +102,17 @@ def i_need_help(fbid):
     #railapi.post_facebook_message_normal(fbid, "Ruk bhai karta hu teri madad")
     rsData = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
                                                                     "payload": {"template_type": "generic",
-                                                                                "elements": [{"title": "trainNumber <space> stationName , Example : 11057 Bhopal",
-                                                                                              "image_url": "https://is02.ezphotoshare.com/2017/07/16/snFSRa.jpg",
-                                                                                              "subtitle": "For running status of train"}]}}}}
+                                                                                "elements": [{"title": "I am here to help you !",
+                                                                                              "image_url": "https://s-media-cache-ak0.pinimg.com/736x/1a/22/8a/1a228a1d771c36dbe7b301a5a1d608fa--cv-writing-service-writing-services.jpg",
+                                                                                              "subtitle": "Below are some queries you can ask me"}]}}}}
     railapi.post_generic_template(rsData)
 
-    rsData = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
-                                                                    "payload": {"template_type": "generic",
-                                                                                "elements": [{
-                                                                                                 "title": "FromStation <space> to <space> ToStation , Example : Bhopal to Burhanpur",
-                                                                                                 "image_url": "https://ci.memecdn.com/9785823.jpg",
-                                                                                                 "subtitle": "For Train between these station in next 4 hours"}]}}}}
-    railapi.post_generic_template(rsData)
+    #rsData = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
+     #                                                               "payload": {"template_type": "generic",
+     #                                                                           "elements": [{
+     #                                                                                            "title": "FromStation <space> to <space> ToStation , Example : Bhopal to Burhanpur",
+     ##                                                                                            "image_url": "https://ci.memecdn.com/9785823.jpg",
+      #                                                                                           "subtitle": "For Train between these station in next 4 hours"}]}}}}
+    #railapi.post_generic_template(rsData)
+    railapi.post_facebook_message_normal(fbid, "For Running train status you can ask - 1. Find status for 11057 at bhopal \n 2. get me live status for 11057 at Bhopal \n 3. I am at Bhopal station waiting for 11057 ")
+    railapi.post_facebook_message_normal(fbid, "For Trains between status within next 4 hours \n 1.live station for bhopal to goa \n 2. train between Bhopal to goa \n or simply bhopal to goa")

@@ -63,6 +63,8 @@ class RailMitraView(generic.View):
                             return HttpResponse()
                         if messageArgsLen == 1 and str(messageArgs[0]).strip().lower() == 'help':
                             i_need_help(fbid)
+                        elif messageArgsLen == 1 and str(messageArgs[0]).strip().lower() == ('hi' or 'hello' or 'hey'):
+                            railapi.defaultMessage(fbid)
                         else:
                             railapi.post_facebook_message_normal(fbid, airesponsetext['result']['fulfillment']['speech'])
                     else:

@@ -51,6 +51,14 @@ class RailMitraView(generic.View):
                             elif airesponsetext['result']['metadata']['intentName'] == 'TrainStatus':
                                 running_status(fbid, airesponsetext['result']['parameters']['trainNumber'],
                                                airesponsetext['result']['parameters']['boardingStation'])
+                            elif airesponsetext['result']['metadata']['intentName'] == 'What Can I ask':
+                                intentText = 'You can start asking me \n Who are you? \n Who is your boss? \n you are fired ? \n You are bad \n What\'s your birth date? \n are you busy? \n can you help me? \n you are good. \n are you happy? \n do you have a hobby? \n are you hungy? \n are we friends? \n where do you live? \n For more commands reply with More'
+                                railapi.post_facebook_message_normal(fbid, intentText)
+                                return HttpResponse()
+                            elif airesponsetext['result']['metadata']['intentName'] == 'More Intents':
+                                intentText = 'Some more Commands are \n I am very angry right now. \n I am back \n I am bored \n I am busy \n I can\'t sleep \n I am here \n I like you. \n I am so lonely \n what do i look like \n I love you. \n I need an advice \n I am sad \n I am sleepy. \n I am just testing you. \n Give me a hug. \n You are wrong. \n'
+                                railapi.post_facebook_message_normal(fbid, intentText)
+                                return HttpResponse()
                         except:
                             pass
                         try:

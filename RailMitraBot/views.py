@@ -127,5 +127,5 @@ def i_need_help(fbid):
      ##                                                                                            "image_url": "https://ci.memecdn.com/9785823.jpg",
       #                                                                                           "subtitle": "For Train between these station in next 4 hours"}]}}}}
     #railapi.post_generic_template(rsData)
-    railapi.post_facebook_message_normal(fbid, "For Running train status you can ask \n 1. Find status for 11057 at bhopal \n 2. get me live status for 11057 at Bhopal \n 3. I am at Bhopal station waiting for 11057 ")
-    railapi.post_facebook_message_normal(fbid, "For Trains between status within next 4 hours \n 1.live station for bhopal to goa \n 2. train between Bhopal to goa \n 3. bhopal to goa or as you wish to ask me")
+    railapi.post_facebook_message_normal(fbid, "For Running train status you can ask \n\nFind status for 11057 at bhopal \n\nGet me live status for 11057 at Bhopal \n\nI am at Bhopal station waiting for 11057 ")
+    railapi.post_facebook_message_normal(fbid, "For Trains between status within next 4 hours \n\nLive station for bhopal to goa \n\nTrain between Bhopal to goa \n\nBhopal to goa or as you wish to ask me")

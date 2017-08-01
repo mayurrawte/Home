@@ -31,14 +31,11 @@ class RailMitraView(generic.View):
 
     def post(self, request, *args, **kwargs):
         incoming_message = json.loads(self.request.body.decode('utf-8'))
-        #obj = open('incomingpostmessage.txt', 'w+') message loggin off
-        #obj.write(json.dumps(incoming_message))
+        obj = open("incomingpostmessage.txt", "w+") # message logging
+        obj.write(json.dumps(incoming_message))
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
-                ob = open('lastlog.txt', 'w+')  # logging message
-                ob.write(json.dumps(message))
                 fbid = message['sender']['id']
-                command_type = 0
                 if 'message' in message:
                     if 'text' in message['message']:
                         text = message['message']['text']
@@ -67,6 +64,8 @@ class RailMitraView(generic.View):
                             railapi.defaultMessage(fbid)
                         else:
                             railapi.post_facebook_message_normal(fbid, airesponsetext['result']['fulfillment']['speech'])
+                    elif 'attachments' in message['message']:
+                        railapi.post_facebook_message_normal(fbid, message['message'])
                     else:
                         railapi.post_facebook_message_normal(message['sender']['id'], message['message']['attachments'])
                 elif 'postback' in message:

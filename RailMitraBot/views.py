@@ -86,6 +86,9 @@ class RailMitraView(generic.View):
                         i_need_help(fbid)
                     elif message['postback']['payload'].lower() == 'hi':
                         railapi.defaultMessage(fbid)
+                    elif message['postback']['payload'].lower() == 'talk to me':
+                        intentText = 'You can start asking me \n Who are you? \n Who is your boss? \n you are fired ? \n You are bad \n What\'s your birth date? \n are you busy? \n can you help me? \n you are good. \n are you happy? \n do you have a hobby? \n are you hungy? \n are we friends? \n where do you live? \n For more commands reply with More'
+                        railapi.post_facebook_message_normal(fbid, intentText)
                     else:
                         data = json.loads(message['postback']['payload'])
                         if 'validStationFrom' in data and not 'validStationTo' in data:

@@ -2246,9 +2246,10 @@ def defaultMessage(fbid):
                                                                                                  "image_url": "http://static.dnaindia.com/sites/default/files/2014/11/29/288247-ddlj-1.jpg",
                                                                                                  "subtitle": "Simran Was not Smart but you are !"}]}}}}
     post_generic_template(rsData)
-    text = "For more information Reply with 'help' or click button below"
-    data = {"Buttons": [{"type": "postback", "title": "Help", "payload": "help"}], "text": text}
+    text = "For more information Reply with 'help' or click buttons below"
+    data = {"Buttons": [{"type": "postback", "title": "Help", "payload": "help"}, {"type": "postback", "title": "Talk to me", "payload": "talk to me"} ], "text": text}
     post_facebook_buttons(fbid, data)
+
 
 
 def getStationNamesforliveStation(fbid, stationFrom, stationTo, type):

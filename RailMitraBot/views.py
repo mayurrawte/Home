@@ -46,26 +46,31 @@ class RailMitraView(generic.View):
                         airesponsetext = json.loads(airesponse.read())
                         try:
                             if airesponsetext['result']['metadata']['intentName'] == 'LiveStation':
-                                railapi.getStationNamesforliveStation(fbid, airesponsetext['result']['parameters']['sourceStation'], airesponsetext['result']['parameters']['DestinationStation'], 1)
+                                railapi.getStationNamesforliveStation(fbid, airesponsetext['result']['parameters'][
+                                    'sourceStation'], airesponsetext['result']['parameters']['DestinationStation'], 1)
                             elif airesponsetext['result']['metadata']['intentName'] == 'TrainStatus':
-                                running_status(fbid, airesponsetext['result']['parameters']['trainNumber'], airesponsetext['result']['parameters']['boardingStation'])
+                                running_status(fbid, airesponsetext['result']['parameters']['trainNumber'],
+                                               airesponsetext['result']['parameters']['boardingStation'])
                         except:
                             pass
                         try:
                             messageArgs = str(text).split()
                             messageArgsLen = len(messageArgs)
                         except UnicodeEncodeError:
-                            railapi.post_facebook_message_normal(fbid, "Mujhe bass ek hi smiley sikhaye gayi hai  ")
-                            railapi.post_facebook_message_normal(fbid, '\U0001f601')
+                            railapi.post_facebook_message_normal(fbid, text)
                             return HttpResponse()
                         if messageArgsLen == 1 and str(messageArgs[0]).strip().lower() == 'help':
                             i_need_help(fbid)
                         elif messageArgsLen == 1 and str(messageArgs[0]).strip().lower() == ('hi' or 'hello' or 'hey'):
                             railapi.defaultMessage(fbid)
                         else:
-                            railapi.post_facebook_message_normal(fbid, airesponsetext['result']['fulfillment']['speech'])
+                            railapi.post_facebook_message_normal(fbid,
+                                                                 airesponsetext['result']['fulfillment']['speech'])
                     elif 'attachments' in message['message']:
-                        railapi.post_facebook_message_normal(fbid, message['message'])
+                        print(message['message'])
+                        data = {"attachment": {"type": "image", "payload": {
+                            "url": "https://scontent.xx.fbcdn.net/v/t39.1997-6/851557_369239266556155_759568595_n.png?_nc_ad=z-m&oh=dc20f0f3ab1494f22a217cdbbdd41561&oe=59FF76DC"}}}
+                        railapi.sendAttachment(fbid, data)
                     else:
                         railapi.post_facebook_message_normal(message['sender']['id'], message['message']['attachments'])
                 elif 'postback' in message:
@@ -77,7 +82,6 @@ class RailMitraView(generic.View):
                             railapi.getStationNamesforliveStation(fbid, data['validStationFrom'], data['stationTo'], 2)
                         elif 'validStationFrom' in data and 'validStationTo' in data:
                             railapi.getLiveStation(fbid, data['validStationFrom'], data['validStationTo'])
-                            # railapi.getStationNamesforliveStation(fbid, data['stationTo'])
         return HttpResponse()
 
 def running_status(fbid, trainNo, station):

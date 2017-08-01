@@ -84,6 +84,8 @@ class RailMitraView(generic.View):
                 elif 'postback' in message:
                     if message['postback']['payload'].lower() == 'help':
                         i_need_help(fbid)
+                    elif message['postback']['payload'].lower() == 'hi':
+                        railapi.defaultMessage(fbid)
                     else:
                         data = json.loads(message['postback']['payload'])
                         if 'validStationFrom' in data and not 'validStationTo' in data:

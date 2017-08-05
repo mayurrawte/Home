@@ -84,8 +84,8 @@ class TrafficGuruView(generic.View):
                                                                                                                      int(text)][
                                                                                                                      'SignalUrl']}]}}}}
                         post_facebook_message(fbid, nextData, 4)
-                        firstDataText = trafficData['trafficData'][int(text)]['SignlaDescription']
-                        post_facebook_message(fbid, firstDataText, 1)
+                        nextDataText = trafficData['trafficData'][int(text)]['SignlaDescription']
+                        post_facebook_message(fbid, nextDataText, 1)
                         custresponsebtn = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
                                                                                                  "payload": {
                                                                                                      "template_type": "button",
@@ -93,10 +93,10 @@ class TrafficGuruView(generic.View):
                                                                                                      "buttons": [{
                                                                                                          "type": "postback",
                                                                                                          "title": "Next",
-                                                                                                         "payload": int(text)}]}}}}
+                                                                                                         "payload": int(text)+1}]}}}}
 
                         post_facebook_message(fbid, custresponsebtn, 4)
-                        post_facebook_message(fbid, custresponsebtn, 4)
+
                         #else:
                          #   res = "You now have knowledge of some important traffic signals. I will update myself and get back to you. Thanks"
                          #   post_facebook_message(fbid, custresponsebtn, 1)

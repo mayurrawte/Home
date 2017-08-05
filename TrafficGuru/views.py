@@ -31,9 +31,17 @@ class TrafficGuruView(generic.View):
                     obj = open('traffictest.txt', 'w+')
                     obj.write(str(message))
                     if 'text' in message['message']:
-                        data = 'heh'
-                        #post_facebook_message(message['sender']['id'], message['message']['text'], 1)
-                        post_facebook_message(message['sender']['id'], data, 1)
+                        custresponse = 'Hi! Nice to see you here. I am TrafficGuru. Yeah Thats what my friends call me coz i know everything about traffic, and probably you are here to get some knowledge about traffic signals. No worries i will master you in that. So lets Start.'
+                        post_facebook_message(message['sender']['id'], custresponse, 1)
+                        custresponsebtn = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
+                                                                                                 "payload": {
+                                                                                                     "template_type": "button",
+                                                                                                     "text": "So lets get ready !",
+                                                                                                     "buttons": [{
+                                                                                                                     "type": "postback",
+                                                                                                                     "title": "READY",
+                                                                                                                     "payload": "Ready"}]}}}}
+                        post_facebook_message(fbid, custresponsebtn, 4)
                     else:
                         post_facebook_message(message['sender']['id'], message['message']['attachments'], 2)
                 elif 'postback' in message:

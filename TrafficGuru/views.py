@@ -105,7 +105,7 @@ class TrafficGuruView(generic.View):
                                                                                                              "payload": int(text)+1}]}}}}
 
                             a = open("debugorder.txt","w+")
-                            a.write(custresponsebtn)
+                            a.write(json.dumps(custresponsebtn))
                             a.close()
                             post_facebook_message(fbid, custresponsebtn, 4)
                         except:

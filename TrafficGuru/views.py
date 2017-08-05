@@ -86,7 +86,20 @@ class TrafficGuruView(generic.View):
                         post_facebook_message(fbid, nextData, 4)
                         firstDataText = trafficData['trafficData'][int(text)]['SignlaDescription']
                         post_facebook_message(fbid, firstDataText, 1)
-
+                        custresponsebtn = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
+                                                                                                 "payload": {
+                                                                                                     "template_type": "button",
+                                                                                                     "text": "That was Great !",
+                                                                                                     "buttons": [{
+                                                                                                         "type": "postback",
+                                                                                                         "title": "Next",
+                                                                                                         "payload": int(text)}]}}}}
+                        if text < len(trafficData['trafficData']):
+                            post_facebook_message(fbid, custresponsebtn, 4)
+                            post_facebook_message(fbid, custresponsebtn, 4)
+                        else:
+                            res = "You now have knowledge of some important traffic signals. I will update myself and get back to you. Thanks"
+                            post_facebook_message(fbid, custresponsebtn, 1)
                         #custresponse = 'Ruko ! mujhe sikhne de fir tumhe sikhaata hu'
                         #post_facebook_message(message['sender']['id'], custresponse, 1)
         return HttpResponse()

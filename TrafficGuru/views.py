@@ -70,33 +70,35 @@ class TrafficGuruView(generic.View):
                                                                                                                      "payload": "1"}]}}}}
                         post_facebook_message(fbid, custresponsebtn, 4)
                     else:
-                        nextData = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
-                                                                                           "payload": {
-                                                                                               "template_type": "generic",
-                                                                                               "elements": [{"title":
-                                                                                                                 trafficData[
-                                                                                                                     'trafficData'][
-                                                                                                                     int(text)][
-                                                                                                                     'signalName'],
-                                                                                                             "image_url":
-                                                                                                                 trafficData[
-                                                                                                                     'trafficData'][
-                                                                                                                     int(text)][
-                                                                                                                     'SignalUrl']}]}}}}
-                        post_facebook_message(fbid, nextData, 4)
-                        nextDataText = trafficData['trafficData'][int(text)]['SignlaDescription']
-                        post_facebook_message(fbid, nextDataText, 1)
-                        custresponsebtn = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
-                                                                                                 "payload": {
-                                                                                                     "template_type": "button",
-                                                                                                     "text": "That was Great !",
-                                                                                                     "buttons": [{
-                                                                                                         "type": "postback",
-                                                                                                         "title": "Next",
-                                                                                                         "payload": int(text)+1}]}}}}
+                        try:
+                            nextData = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
+                                                                                               "payload": {
+                                                                                                   "template_type": "generic",
+                                                                                                   "elements": [{"title":
+                                                                                                                     trafficData[
+                                                                                                                         'trafficData'][
+                                                                                                                         int(text)][
+                                                                                                                         'signalName'],
+                                                                                                                 "image_url":
+                                                                                                                     trafficData[
+                                                                                                                         'trafficData'][
+                                                                                                                         int(text)][
+                                                                                                                         'SignalUrl']}]}}}}
+                            post_facebook_message(fbid, nextData, 4)
+                            nextDataText = trafficData['trafficData'][int(text)]['SignlaDescription']
+                            post_facebook_message(fbid, nextDataText, 1)
+                            custresponsebtn = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
+                                                                                                     "payload": {
+                                                                                                         "template_type": "button",
+                                                                                                         "text": "That was Great !",
+                                                                                                         "buttons": [{
+                                                                                                             "type": "postback",
+                                                                                                             "title": "Next",
+                                                                                                             "payload": int(text)+1}]}}}}
 
-                        post_facebook_message(fbid, custresponsebtn, 4)
-
+                            post_facebook_message(fbid, custresponsebtn, 4)
+                        except:
+                            post_facebook_message(fbid, 'That was all i know, I will be back with some more info. Till then Bye !', 1)
                         #else:
                          #   res = "You now have knowledge of some important traffic signals. I will update myself and get back to you. Thanks"
                          #   post_facebook_message(fbid, custresponsebtn, 1)

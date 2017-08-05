@@ -60,6 +60,15 @@ class TrafficGuruView(generic.View):
                         post_facebook_message(fbid, firstData, 4)
                         firstDataText = trafficData['trafficData'][0]['SignlaDescription']
                         post_facebook_message(fbid, firstDataText, 1)
+                        custresponsebtn = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
+                                                                                                 "payload": {
+                                                                                                     "template_type": "button",
+                                                                                                     "text": "That was Great !",
+                                                                                                     "buttons": [{
+                                                                                                                     "type": "postback",
+                                                                                                                     "title": "Next",
+                                                                                                                     "payload": "1"}]}}}}
+                        post_facebook_message(fbid, custresponsebtn, 4)
                     else:
                         nextData = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
                                                                                            "payload": {
@@ -74,7 +83,7 @@ class TrafficGuruView(generic.View):
                                                                                                                      'trafficData'][
                                                                                                                      int(text)][
                                                                                                                      'SignalUrl']}]}}}}
-                        post_facebook_message(fbid, firstData, 4)
+                        post_facebook_message(fbid, nextData, 4)
                         firstDataText = trafficData['trafficData'][int(text)]['SignlaDescription']
                         post_facebook_message(fbid, firstDataText, 1)
 

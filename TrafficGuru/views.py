@@ -40,13 +40,29 @@ class TrafficGuruView(generic.View):
                     text = message['postback']['payload']
                     if text == 'GET_STARTED_PAYLOAD':
                         custresponse = 'Hi! Nice to see you here. I am TrafficGuru. Yeah Thats what my friends call me coz i know everything about traffic, and probably you are here to get some knowledge about traffic signals. No worries i will master you in that. So lets Start.'
-                        firstData = {"recipient":{"id": fbid}, "message":{"attachment":{"type":"template", "payload":{"template_type":"generic", "elements":[{"title":trafficData['trafficData'][0]['signalName'], "image_url":trafficData['trafficData'][0]['SignalUrl']} ] } } } }
+                        post_facebook_message(message['sender']['id'], custresponse, 1)
+                        custresponsebtn = {"recipient":{"id":fbid }, "message":{"attachment":{"type":"template", "payload":{"template_type":"button", "text":"So lets get ready !", "buttons":[{"type":"postback", "title":"READY", "payload":"Ready"} ] } } } }
+                        post_facebook_message(fbid, custresponsebtn, 4)
+                    elif text == 'Ready':
+                        firstData = {"recipient": {"id": fbid}, "message": {"attachment": {"type": "template",
+                                                                                           "payload": {
+                                                                                               "template_type": "generic",
+                                                                                               "elements": [{"title":
+                                                                                                                 trafficData[
+                                                                                                                     'trafficData'][
+                                                                                                                     0][
+                                                                                                                     'signalName'],
+                                                                                                             "image_url":
+                                                                                                                 trafficData[
+                                                                                                                     'trafficData'][
+                                                                                                                     0][
+                                                                                                                     'SignalUrl']}]}}}}
                         post_facebook_message(fbid, firstData, 4)
                         firstDataText = trafficData['trafficData'][0]['SignlaDescription']
-                        post_facebook_message(fbid, firstDataText,1)
+                        post_facebook_message(fbid, firstDataText, 1)
                     else:
                         custresponse = 'Ruko ! mujhe sikhne de fir tumhe sikhaata hu'
-                    post_facebook_message(message['sender']['id'], custresponse, 1)
+                        post_facebook_message(message['sender']['id'], custresponse, 1)
         return HttpResponse()
 
 def post_facebook_message(fbid, recevied_message,mtype):

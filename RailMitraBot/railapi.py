@@ -2299,7 +2299,7 @@ def getStationNamesforliveStation(fbid, stationFrom, stationTo, type):
 
 
 def getLiveStation(fbid, stationFrom, stationTo):
-    url = 'http://enquiry.indianrail.gov.in/mntes/q?opt=LiveStation&subOpt=show'
+    url = 'https://enquiry.indianrail.gov.in/mntes/q?opt=LiveStation&subOpt=show'
     data = 'jFromStationInput=' + stationFrom + '&jToStationInput=' + stationTo + '&nHr=4&jStnName=&jStation='
     r = requests.post(url, headers={"Content-Type": "application/x-www-form-urlencoded"}, data=data)
     soup = BeautifulSoup(r.text, 'lxml')

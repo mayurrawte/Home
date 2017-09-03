@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Someone @ port 80</title>
+	<title>Hello World | Mayur Rawte</title>
 	<meta charset="utf-8">
     {% load static %}
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,6 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'index/css/generic.css' %}">
 </head>
 <body>
-
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -25,9 +24,9 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">WHO</a></li>
-        <li><a href="#">WHAT</a></li>
-        <li><a href="#">WHERE</a></li>
+{#        <li><a href="#">WHO</a></li>#}
+{#        <li><a href="#">WHAT</a></li>#}
+{#        <li><a href="#">WHERE</a></li>#}
       </ul>
     </div>
   </div>
@@ -35,164 +34,275 @@
 
 
 <!-- First Container -->
-<div class="container-fluid bg-1 text-center">
-    <div class="header-text">
+<div class="container-fluid container-1">
+    <div class="first-container-bg"></div>
+    <div class="first-container-content">
+        <div class="header-text">
         <h1>Hello World !<br /> I am <br /> <span id="head-title"></span></h1>
+    </div>
+    </div>
+
+</div>
+
+
+
+{#<div class="container-breaks cont-who-am-i">#}
+{#</div>#}
+<!-- Second Container -->
+
+<div class="container-fluid bg-2 ">
+    <div class="col-lg-12"> <h3>Who Am I?</h3></div>
+    <div class="col-lg-5 i-bg">
+        <img src="{% static 'index/images/new-i.png'%}" class="i-img">
+    </div>
+     <div class="col-lg-7 text-left">
+        <p class="mydetail-txt"> I am one of those crazy geeks  who would love to work rather than anything else. I have friends, i can count on fingers, my laptop is one of the closed among them. I spend hours exploring with it. I maybe quite, not open to many, a covered book and not at all hungry for attention . Not perfect, maybe not even closest to it but i compete with my myself, a better version of me everyday. Helping others,  that's what keeps me going. Everyone around inspires me to do things that i never thought i could do, positivity. Directly or indirectly , knowingly or unknowingly you help me to be a better person. <br /> Meet me I am just someone !</p>
+    </div>
+</div>
+
+{#<div class="container-breaks ">#}
+{##}
+{#</div>#}
+
+<div class="container-fluid tech-stack">
+    <h3>Technology Stacks I worked on </h3>
+    <div class="row">
+        <div class="col-md-1 col-md-offset-1 col-xs-2 col-sm-1 col-lg-1"><div class="tech-stack-thumb"><img src="{% static 'index/images/TsIco/python.png' %}"></div><p>Python</p></div>
+        <div class="col-md-1 col-xs-2 col-sm-1 col-lg-1"><div class="tech-stack-thumb"><img src="{% static 'index/images/TsIco/django.png' %}"></div><p>Django</p></div>
+        <div class="col-md-1 col-xs-2 col-sm-1 col-lg-1"><div class="tech-stack-thumb"><img src="{% static 'index/images/TsIco/angular.png' %}"></div><p>Angular</p></div>
+        <div class="col-md-1 col-xs-2 col-sm-1 col-lg-1"><div class="tech-stack-thumb"><img src="{% static 'index/images/TsIco/linux.png' %}"></div><p>Linux</p></div>
+        <div class="col-md-1 col-xs-2 col-sm-1 col-lg-1"><div class="tech-stack-thumb"><img src="{% static 'index/images/TsIco/js.png' %}"></div><p>JavaScript</p></div>
+        <div class="col-md-1 col-xs-2 col-sm-1 col-lg-1"><div class="tech-stack-thumb"><img src="{% static 'index/images/TsIco/arduino.png' %}"></div><p>Arduino</p></div>
+        <div class="col-md-1 col-xs-2 col-sm-1 col-lg-1"><div class="tech-stack-thumb"><img src="{% static 'index/images/TsIco/jquery.png' %}"></div><p>Jquery</p></div>
+        <div class="col-md-1 col-xs-2 col-sm-1 col-lg-1"><div class="tech-stack-thumb"><img src="{% static 'index/images/TsIco/iot.png' %}"></div><p>IoT</p></div>
+        <div class="col-md-1 col-xs-2 col-sm-1 col-lg-1"><div class="tech-stack-thumb"><img src="{% static 'index/images/TsIco/php.png' %}"></div><p>php</p></div>
+        <div class="col-md-1 col-xs-2 col-sm-1 col-lg-1"><div class="tech-stack-thumb"><img src="{% static 'index/images/TsIco/lua.png' %}"></div><p>Lua</p></div>
+    </div>
+</div>
+
+<div class="container-fluid portfolio">
+    <h3>Portfolio</h3>
+    <div class="col-md-5 col-xs-10 col-sm-10 pf-item" data-toggle="modal" data-target="#pf-mozo">
+        <div class="pf-item-thumb col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+            <img src="{% static 'index/images/mozo.png'%}" class="responsive-img">
+        </div>
+        <div class="pf-item-short-detail col-md-12 col-xs-12 col-sm-12">
+            <h3>Mozo</h3>
+            <p>A Virtual Munim</p>
+        </div>
+    </div>
+    <div class="col-md-5 pf-item col-sm-10 col-xs-10" data-toggle="modal" data-target="#pf-railmitra">
+        <div class="pf-item-thumb col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+            <img src="{% static 'index/images/rm.png'%}" class="responsive-img">
+        </div>
+        <div class="pf-item-short-detail col-md-12 col-xs-12 col-sm-12">
+            <h3>RailMitra</h3>
+            <p>Your journey friend to india railways</p>
+        </div>
+    </div>
+    <div class="col-md-5 pf-item col-sm-10 col-xs-10" data-toggle="modal" data-target="#pf-eliot">
+        <div class="pf-item-thumb col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+            <img src="{% static 'index/images/eliot.png'%}" class="responsive-img">
+        </div>
+        <div class="pf-item-short-detail col-md-12 col-xs-12 col-sm-12">
+            <h3>Eliot</h3>
+            <p>Smart Prepaid Energy meter based on Internet of Things</p>
+        </div>
+    </div>
+    <div class="col-md-5 pf-item col-sm-10 col-xs-10" data-toggle="modal" data-target="#pf-typingkeeda">
+        <div class="pf-item-thumb col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+            <img src="{% static 'index/images/tk.png'%}" class="responsive-img">
+        </div>
+        <div class="pf-item-short-detail col-md-12 col-xs-12 col-sm-12">
+            <h3>TypingKeeda</h3>
+            <p>One minute typing speedtest game</p>
+        </div>
     </div>
 </div>
 
 
-
-<!-- Second Container -->
-<div class="container-fluid bg-2 text-center">
-  <h3 class="margin">Who Am I?</h3>
-  <p> I am one of those crazy geeks  who would love to work rather than anything else. I have friends, i can count on fingers, my laptop is one of the closed among them. I spend hours exploring with it. I maybe quite, not open to many, a covered book and not at all hungry for attention . Not perfect, maybe not even closest to it but i compete with my myself, a better version of me everyday. Helping others,  that's what keeps me going. Everyone around inspires me to do things that i never thought i could do, positivity. Directly or indirectly , knowingly or unknowingly you help me to be a better person. <br /> Meet me I am just someone !</p>
-
+<div class="container-fluid extra ">
+    <div class="col-lg-12">
+        <h3>Something i do in spare times</h3>
+    </div>
+    <div class="col-lg-5 extra-bg">
+        <img src="{% static 'index/images/auth.png'%}" class="i-img">
+    </div>
+     <div class="col-lg-7 extra-content-bg">
+        <div class="extra-cards">
+            <h4>Publication</h4>
+            <div class="pub-div"><a href="http://www.ijcaonline.org/archives/volume171/number2/28154-2017914985" target="_blank"><p class="head">Smart Prepaid Energy Meter Based on Internt Of Things</p><br/><p class="head-sub">International Journal of Computer Application</p></a></div>
+        </div>
+         <div class="extra-cards">
+             <h4>Videos</h4>
+           <iframe width="200" height="150" src="https://www.youtube.com/embed/HieWSv7YshI" frameborder="0" allowfullscreen></iframe>
+             <iframe width="200" height="150" src="https://www.youtube.com/embed/kcxlPorCoyg" frameborder="0" allowfullscreen></iframe>
+             <iframe width="200" height="150" src="https://www.youtube.com/embed/lZEoZ93LZ4o" frameborder="0" allowfullscreen></iframe>
+        </div>
+         <div class="extra-cards">
+             <h4>GitHub</h4>
+             <div class="github-card" data-github="mr-someone" data-width="500" data-height="" data-theme="default"></div>
+             <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+         </div>
+         <div class="extra-cards">
+             <span class='quora-content-embed' data-name='Can-my-WhatsApps-be-hacked-and-by-who/answer/Mayur-Rawte'>Read <a class='quora-content-link' data-width='600' data-height='250' href='https://www.quora.com/Can-my-WhatsApps-be-hacked-and-by-who/answer/Mayur-Rawte' data-type='answer' data-id='54337116' data-key='f4cde21517072612aba48678339658d2' load-full-answer='False' data-embed='opxppnr'><a href='https://www.quora.com/Mayur-Rawte'>Mayur Rawte</a>&#039;s <a href='/Can-my-WhatsApps-be-hacked-and-by-who#ans54337116'>answer</a> to <a href='/Can-my-WhatsApps-be-hacked-and-by-who' ref='canonical'><span class="rendered_qtext">Can my WhatsApps be hacked, and by who?</span></a></a> on <a href='https://www.__nousername__.main.quora.com'>Quora</a><script type="text/javascript" src="https://www.quora.com/widgets/content"></script></span>
+         </div>
+    </div>
 </div>
 
-
-<div class="container-fluid bg-3 ">
-
-	<div class="col-md-10">
-		<h3 class="margin" style="width: 65%;margin: 30px auto;">Journey So Far</h3>
-		<div class="row">
-			<ul class="timeline">
-			  <li class="timeline-event">
-			  	<div class="timeline-cicon"><img src="{% static 'index/images/child.png'%}"></div>
-			    <label class="timeline-event-icon"></label>
-			    <div class="timeline-event-copy">
-			      <p class="timeline-event-thumbnail">November 1995</p>
-			      <p>Mayur = new Person("Mayur","weird introvert"); <br /><small>I was initialized</small></p>
-			    </div>
-			  </li>
-			  <li class="timeline-event">
-    			<div class="timeline-cicon"><img src="{% static 'index/images/boy.png' %}"></div>
-			    <label class="timeline-event-icon"></label>
-			    <div class="timeline-event-copy">
-			      <p class="timeline-event-thumbnail">Early 2013</p>
-			      <p>Spend my life like a normal human. <br /><small>Everything was fine !</small></p>
-			    </div>
-			  </li>
-			  <li class="timeline-event">
-				  <div class="timeline-cicon"><img src="{% static 'index/images/college.png' %}"></div>
-			    <label class="timeline-event-icon"></label>
-			    <div class="timeline-event-copy">
-			      <p class="timeline-event-thumbnail">August 2013</p>
-			      <p>Taken admission in Information Technology, Engineering <br /><small>don't know how and why. Maybe because ...... ! Don't know :P</small></p>
-			    </div>
-			  </li>
-			  <li class="timeline-event">
-				  <div class="timeline-cicon"><img src="{% static 'index/images/computer.png' %}"></div>
-			    <label class="timeline-event-icon"></label>
-			    <div class="timeline-event-copy">
-			      <p class="timeline-event-thumbnail">Dec 2013</p>
-			      <p>Got introduced to computer <br /><small>Life was about to change </small></p>
-			    </div>
-			  </li>
-			  <li class="timeline-event">
-				  <div class="timeline-cicon"><img src="{% static 'index/images/love.png' %}"></div>
-			    <label class="timeline-event-icon"></label>
-			    <div class="timeline-event-copy">
-			      <p class="timeline-event-thumbnail">Jan 2014</p>
-			      <p>Found love : Programming<br /><small> C was so impressive  </small></p>
-			    </div>
-			  </li>
-			  <li class="timeline-event">
-				  <div class="timeline-cicon"><img src="{% static 'index/images/object.png' %}"></div>
-			    <label class="timeline-event-icon"></label>
-			    <div class="timeline-event-copy">
-			      <p class="timeline-event-thumbnail">May 2014</p>
-			      <p>Object Oriented World<br /><small> Everything became object and class, even i was an object.  </small></p>
-			    </div>
-			  </li>
-			  <li class="timeline-event">
-				  <div class="timeline-cicon"><img src="{% static 'index/images/cs.png' %}"></div>
-			    <label class="timeline-event-icon"></label>
-			    <div class="timeline-event-copy">
-			      <p class="timeline-event-thumbnail">August 2014</p>
-			      <p>Microsoft Fever : C# (that's not hash)<br /><small>Windows Phone App Development </small></p>
-			    </div>
-			  </li>
-			  <li class="timeline-event">
-			  	<div class="timeline-cicon"><img src="{% static 'index/images/hack.png' %}"></div>
-			    <label class="timeline-event-icon"></label>
-			    <div class="timeline-event-copy">
-			      <p class="timeline-event-thumbnail">Nov 2015</p>
-			      <p>I want to be a hacker.<br /><small>Kali linux made me feel like one.</small></p>
-			    </div>
-			  </li>
-			  <li class="timeline-event">
-			  	<div class="timeline-cicon"><img src="{% static 'index/images/programmer.png' %}"></div>
-			    <label class="timeline-event-icon"></label>
-			    <div class="timeline-event-copy">
-			      <p class="timeline-event-thumbnail">Jan 2015</p>
-			      <p>Programming languages , i need to learn them all !<br /><small>Java, HTML, CSS, JAVASCRIPT, PHP ! <br /> HTML is not a language by the way :P</small></p>
-			    </div>
-			  </li>
-			  <li class="timeline-event">
-				  <div class="timeline-cicon"><img src="{% static 'index/images/web.png' %}"></div>
-			    <label class="timeline-event-icon"></label>
-			    <div class="timeline-event-copy">
-			      <p class="timeline-event-thumbnail">July 2015</p>
-			      <p>Practising them was all i need<br /><small>Technical Fest Official Site</small></p>
-			    </div>
-			  </li>
-			  <li class="timeline-event">
-			   <div class="timeline-cicon"><img src="{% static 'index/images/design.png' %}"></div>
-			    <label class="timeline-event-icon"></label>
-			    <div class="timeline-event-copy">
-			      <p class="timeline-event-thumbnail">Augest 2015</p>
-			      <p>I should try Grphic Designing too<br /><small>Corel Draw ,Photoshop and Illustrator became new friends.</small></p>
-			    </div>
-			  </li>
-			  <li class="timeline-event">
-			   <div class="timeline-cicon"><img src="{% static 'index/images/animation.png'%}"></div>
-			    <label class="timeline-event-icon"></label>
-			    <div class="timeline-event-copy">
-			      <p class="timeline-event-thumbnail">Oct 2015</p>
-			      <p>Maybe i should try Animation<br /><small>Blender i takes lots of time.</small></p>
-			    </div>
-			  </li>
-			  <li class="timeline-event">
-			   <div class="timeline-cicon"><img src="{% static 'index/images/startup.png' %}"></div>
-			    <label class="timeline-event-icon"></label>
-			    <div class="timeline-event-copy">
-			      <p class="timeline-event-thumbnail">Nov 2015</p>
-			      <p>Working for a Startup is quite fun<br /><small>Worked for many finally joined one<br />Lots of projects, lots of things to learn.</small></p>
-			    </div>
-			  </li>
-			  <li class="timeline-event">
-			  	<div class="timeline-cicon"><img src="{% static 'index/images/python.png' %}"></div>
-			    <label class="timeline-event-icon"></label>
-			    <div class="timeline-event-copy">
-			      <p class="timeline-event-thumbnail">14th Feb 2016</p>
-			      <p>Init Typingkeeda Django python <br /><small>That's how i met python.</small></p>
-			    </div>
-			  </li>
-			  <li class="timeline-event">
-			  	<div class="timeline-cicon"><img src="{% static 'index/images/iot.png' %}"></div>
-			    <label class="timeline-event-icon"></label>
-			    <div class="timeline-event-copy">
-			      <p class="timeline-event-thumbnail">Sep 2016</p>
-			      <p>Internet of Things<br /><small>Eliot: I can Control Anything ! <br /> Seriously </small></p>
-			    </div>
-			  </li>
-			  <li class="timeline-event">
-			  	<div class="timeline-cicon"><img src="{% static 'index/images/ai.png' %}"></div>
-			    <label class="timeline-event-icon"></label>
-			    <div class="timeline-event-copy">
-			      <p class="timeline-event-thumbnail">April 2017</p>
-			      <p>Code is becoming Intelligent<br /><small>Aritifical Intelligence <br />  </small></p>
-			    </div>
-			  </li>
-
-
-			</ul>
-		</div>
-	</div>
-
-
+<div class="container-fluid container-contact">
+    <h3>Get in touch with me</h3>
+    <div class="row center-block">
+        <div class="col-md-1 col-md-offset-3 col-lg-offset-3 soc-ico col-xs-2 col-sm-2 col-lg-1"><a href="https://www.linkedin.com/in/mayurrawte/" target="_blank"><img src="{% static 'index/images/social/linkedin.png' %}"></a></div>
+        <div class="col-md-1 soc-ico col-xs-2 col-sm-2 col-lg-1"><a href="https://www.facebook.com/mayur.rawte" target="_blank"><img src="{% static 'index/images/social/facebook.png' %}"></a></div>
+        <div class="col-md-1 soc-ico col-xs-2 col-sm-2 col-lg-1"><a href="https://www.quora.com/profile/Mayur-Rawte" target="_blank"><img src="{% static 'index/images/social/quora.png' %}"></a></div>
+        <div class="col-md-1 soc-ico col-xs-2 col-sm-2 col-lg-1"><a href="https://twitter.com/mayurrawte" target="_blank"><img src="{% static 'index/images/social/twitter.png' %}"></a></div>
+        <div class="col-md-1 soc-ico col-xs-2 col-sm-2 col-lg-1"><a href="https://www.instagram.com/_mr_developer/" target="_blank"><img src="{% static 'index/images/social/instagram.png' %}"></a></div>
+        <div class="col-md-1 soc-ico col-xs-2 col-sm-2 col-lg-1"><a href="#" target="_blank"><img src="{% static 'index/images/social/hangout.png' %}"></a></div>
+    </div>
 </div>
+
+{#<div class="container-fluid bg-3 ">#}
+{#	<div class="col-md-10">#}
+{#		<h3 class="margin" style="width: 65%;margin: 30px auto;">Journey So Far</h3>#}
+{#		<div class="row">#}
+{#			<ul class="timeline">#}
+{#			  <li class="timeline-event">#}
+{#			  	<div class="timeline-cicon"><img src="{% static 'index/images/child.png'%}"></div>#}
+{#			    <label class="timeline-event-icon"></label>#}
+{#			    <div class="timeline-event-copy">#}
+{#			      <p class="timeline-event-thumbnail">November 1995</p>#}
+{#			      <p>Mayur = new Person("Mayur","weird introvert"); <br /><small>I was initialized</small></p>#}
+{#			    </div>#}
+{#			  </li>#}
+{#			  <li class="timeline-event">#}
+{#    			<div class="timeline-cicon"><img src="{% static 'index/images/boy.png' %}"></div>#}
+{#			    <label class="timeline-event-icon"></label>#}
+{#			    <div class="timeline-event-copy">#}
+{#			      <p class="timeline-event-thumbnail">Early 2013</p>#}
+{#			      <p>Spend my life like a normal human. <br /><small>Everything was fine !</small></p>#}
+{#			    </div>#}
+{#			  </li>#}
+{#			  <li class="timeline-event">#}
+{#				  <div class="timeline-cicon"><img src="{% static 'index/images/college.png' %}"></div>#}
+{#			    <label class="timeline-event-icon"></label>#}
+{#			    <div class="timeline-event-copy">#}
+{#			      <p class="timeline-event-thumbnail">August 2013</p>#}
+{#			      <p>Taken admission in Information Technology, Engineering <br /><small>don't know how and why. Maybe because ...... ! Don't know :P</small></p>#}
+{#			    </div>#}
+{#			  </li>#}
+{#			  <li class="timeline-event">#}
+{#				  <div class="timeline-cicon"><img src="{% static 'index/images/computer.png' %}"></div>#}
+{#			    <label class="timeline-event-icon"></label>#}
+{#			    <div class="timeline-event-copy">#}
+{#			      <p class="timeline-event-thumbnail">Dec 2013</p>#}
+{#			      <p>Got introduced to computer <br /><small>Life was about to change </small></p>#}
+{#			    </div>#}
+{#			  </li>#}
+{#			  <li class="timeline-event">#}
+{#				  <div class="timeline-cicon"><img src="{% static 'index/images/love.png' %}"></div>#}
+{#			    <label class="timeline-event-icon"></label>#}
+{#			    <div class="timeline-event-copy">#}
+{#			      <p class="timeline-event-thumbnail">Jan 2014</p>#}
+{#			      <p>Found love : Programming<br /><small> C was so impressive  </small></p>#}
+{#			    </div>#}
+{#			  </li>#}
+{#			  <li class="timeline-event">#}
+{#				  <div class="timeline-cicon"><img src="{% static 'index/images/object.png' %}"></div>#}
+{#			    <label class="timeline-event-icon"></label>#}
+{#			    <div class="timeline-event-copy">#}
+{#			      <p class="timeline-event-thumbnail">May 2014</p>#}
+{#			      <p>Object Oriented World<br /><small> Everything became object and class, even i was an object.  </small></p>#}
+{#			    </div>#}
+{#			  </li>#}
+{#			  <li class="timeline-event">#}
+{#				  <div class="timeline-cicon"><img src="{% static 'index/images/cs.png' %}"></div>#}
+{#			    <label class="timeline-event-icon"></label>#}
+{#			    <div class="timeline-event-copy">#}
+{#			      <p class="timeline-event-thumbnail">August 2014</p>#}
+{#			      <p>Microsoft Fever : C# (that's not hash)<br /><small>Windows Phone App Development </small></p>#}
+{#			    </div>#}
+{#			  </li>#}
+{#			  <li class="timeline-event">#}
+{#			  	<div class="timeline-cicon"><img src="{% static 'index/images/hack.png' %}"></div>#}
+{#			    <label class="timeline-event-icon"></label>#}
+{#			    <div class="timeline-event-copy">#}
+{#			      <p class="timeline-event-thumbnail">Nov 2015</p>#}
+{#			      <p>I want to be a hacker.<br /><small>Kali linux made me feel like one.</small></p>#}
+{#			    </div>#}
+{#			  </li>#}
+{#			  <li class="timeline-event">#}
+{#			  	<div class="timeline-cicon"><img src="{% static 'index/images/programmer.png' %}"></div>#}
+{#			    <label class="timeline-event-icon"></label>#}
+{#			    <div class="timeline-event-copy">#}
+{#			      <p class="timeline-event-thumbnail">Jan 2015</p>#}
+{#			      <p>Programming languages , i need to learn them all !<br /><small>Java, HTML, CSS, JAVASCRIPT, PHP ! <br /> HTML is not a language by the way :P</small></p>#}
+{#			    </div>#}
+{#			  </li>#}
+{#			  <li class="timeline-event">#}
+{#				  <div class="timeline-cicon"><img src="{% static 'index/images/web.png' %}"></div>#}
+{#			    <label class="timeline-event-icon"></label>#}
+{#			    <div class="timeline-event-copy">#}
+{#			      <p class="timeline-event-thumbnail">July 2015</p>#}
+{#			      <p>Practising them was all i need<br /><small>Technical Fest Official Site</small></p>#}
+{#			    </div>#}
+{#			  </li>#}
+{#			  <li class="timeline-event">#}
+{#			   <div class="timeline-cicon"><img src="{% static 'index/images/design.png' %}"></div>#}
+{#			    <label class="timeline-event-icon"></label>#}
+{#			    <div class="timeline-event-copy">#}
+{#			      <p class="timeline-event-thumbnail">Augest 2015</p>#}
+{#			      <p>I should try Grphic Designing too<br /><small>Corel Draw ,Photoshop and Illustrator became new friends.</small></p>#}
+{#			    </div>#}
+{#			  </li>#}
+{#			  <li class="timeline-event">#}
+{#			   <div class="timeline-cicon"><img src="{% static 'index/images/animation.png'%}"></div>#}
+{#			    <label class="timeline-event-icon"></label>#}
+{#			    <div class="timeline-event-copy">#}
+{#			      <p class="timeline-event-thumbnail">Oct 2015</p>#}
+{#			      <p>Maybe i should try Animation<br /><small>Blender i takes lots of time.</small></p>#}
+{#			    </div>#}
+{#			  </li>#}
+{#			  <li class="timeline-event">#}
+{#			   <div class="timeline-cicon"><img src="{% static 'index/images/startup.png' %}"></div>#}
+{#			    <label class="timeline-event-icon"></label>#}
+{#			    <div class="timeline-event-copy">#}
+{#			      <p class="timeline-event-thumbnail">Nov 2015</p>#}
+{#			      <p>Working for a Startup is quite fun<br /><small>Worked for many finally joined one<br />Lots of projects, lots of things to learn.</small></p>#}
+{#			    </div>#}
+{#			  </li>#}
+{#			  <li class="timeline-event">#}
+{#			  	<div class="timeline-cicon"><img src="{% static 'index/images/python.png' %}"></div>#}
+{#			    <label class="timeline-event-icon"></label>#}
+{#			    <div class="timeline-event-copy">#}
+{#			      <p class="timeline-event-thumbnail">14th Feb 2016</p>#}
+{#			      <p>Init Typingkeeda Django python <br /><small>That's how i met python.</small></p>#}
+{#			    </div>#}
+{#			  </li>#}
+{#			  <li class="timeline-event">#}
+{#			  	<div class="timeline-cicon"><img src="{% static 'index/images/iot.png' %}"></div>#}
+{#			    <label class="timeline-event-icon"></label>#}
+{#			    <div class="timeline-event-copy">#}
+{#			      <p class="timeline-event-thumbnail">Sep 2016</p>#}
+{#			      <p>Internet of Things<br /><small>Eliot: I can Control Anything ! <br /> Seriously </small></p>#}
+{#			    </div>#}
+{#			  </li>#}
+{#			  <li class="timeline-event">#}
+{#			  	<div class="timeline-cicon"><img src="{% static 'index/images/ai.png' %}"></div>#}
+{#			    <label class="timeline-event-icon"></label>#}
+{#			    <div class="timeline-event-copy">#}
+{#			      <p class="timeline-event-thumbnail">April 2017</p>#}
+{#			      <p>Code is becoming Intelligent<br /><small>Aritifical Intelligence <br />  </small></p>#}
+{#			    </div>#}
+{#			  </li>#}
+{##}
+{##}
+{#			</ul>#}
+{#		</div>#}
+{#	</div>#}
+
+{##}
+{#</div>#}
 
 <!-- Third Container (Grid)
 <div class="container-fluid bg-3 text-center">
@@ -215,9 +325,119 @@
 
 -->
 
+
+<!-- Modal -->
+<div id="pf-mozo" class="modal fade m-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mozo <sub>A Virtual Munim</sub></h4>
+      </div>
+      <div class="modal-body col-md-12">
+          <div class="modal-head-img">
+              <img src="{% static 'index/images/mozo.png' %}">
+          </div>
+          <div class="modal-detail">
+              <p class="detail-header">Info</p>  <br />
+              <p class="detail-content"> Mozo is a web based Expense Manager</p>
+              <p class="detail-header">Tech</p> <br />
+              <p class="detail-content">Angular, Django, Python , django-rest-framework, Material-Angular , Bootstrap, JavaScript</p>
+          </div>
+      </div>
+      <div class="modal-footer">
+          <a href="http://mozo.some-one.me/" target="_blank"><button class="modal-btn btn btn-primary">View Live</button></a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pf-railmitra" class="modal fade m-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Railmitra<sub>Your friend to daily journey</sub></h4>
+      </div>
+      <div class="modal-body col-md-12">
+          <div class="modal-head-img">
+              <img src="{% static 'index/images/rm.png' %}">
+          </div>
+          <div class="modal-detail">
+              <p class="detail-header">Info</p>  <br />
+              <p class="detail-content"> Railmitra is a messenger bot for easy enquiry of rail status !</p>
+              <p class="detail-header">Tech</p> <br />
+              <p class="detail-content">Django, Python , Web Scrapping, Messenger Platform, Material-Angular , Bootstrap, JavaScript</p>
+          </div>
+      </div>
+      <div class="modal-footer">
+          <a href="http://m.me/iamrailmitra/" target="_blank"><button class="modal-btn btn btn-primary">View Live</button></a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pf-eliot" class="modal fade m-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Eliot<sub>Smart Prepaid Energy Meter</sub></h4>
+      </div>
+      <div class="modal-body col-md-12">
+          <div class="modal-head-img">
+              <img src="{% static 'index/images/eliot.png' %}">
+          </div>
+          <div class="modal-detail">
+              <p class="detail-header">Info</p>  <br />
+              <p class="detail-content">Eliot is a smart prepaid energy meter</p>
+              <p class="detail-header">Tech</p> <br />
+              <p class="detail-content">Angular, Django, Python , django-rest-framework, Material-Angular , Bootstrap, JavaScript</p>
+          </div>
+      </div>
+      <div class="modal-footer">
+          <a href="http://eliot.some-one.me/" target="_blank"><button class="modal-btn btn btn-primary">View Live</button></a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pf-typingkeeda" class="modal fade m-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Typingkeeda<sub></sub></h4>
+      </div>
+      <div class="modal-body col-md-12">
+          <div class="modal-head-img">
+              <img src="{% static 'index/images/tk.png' %}">
+          </div>
+          <div class="modal-detail">
+              <p class="detail-header">Info</p>  <br />
+              <p class="detail-content">A one minute typing speed game</p>
+              <p class="detail-header">Tech</p> <br />
+              <p class="detail-content">Angular, Django, Python , django-rest-framework, Material-Angular , Bootstrap, JavaScript</p>
+          </div>
+      </div>
+      <div class="modal-footer">
+          <a href="http://typingkeeda.some-one.me/" target="_blank"><button class="modal-btn btn btn-primary">View Live</button></a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 <!-- Footer -->
 <footer class="container-fluid bg-4 text-center">
-  <p>Someone's Design</p>
+  <p>Made with &heartsuit; by $omeone</p>
 </footer>
 <script src="{% static 'index/js/typed.js' %}"></script>
 <script>

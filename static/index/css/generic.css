@@ -1,4 +1,7 @@
- @import url('https://fonts.googleapis.com/css?family=Averia+Serif+Libre|Megrim');
+ @import url('https://fonts.googleapis.com/css?family=Averia+Serif+Libre');
+ @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,700);
+ @import url('https://fonts.googleapis.com/css?family=Ubuntu|Satisfy');
+ @import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
  body 
  {
       font: 20px Montserrat, sans-serif;
@@ -6,30 +9,98 @@
       color: #f5f6f7;
       font-family: Averia Serif Libre;
 }
-.navbar
-{
-  font-family:Megrim;
+.navbar {
+    font-family: "Satisfy";
+}
+.tech-stack h3 {
+        color: #444444;
+    text-align: center;
+    padding: 20px 30px 21px;
+    font-family: Satisfy;
+    border-bottom: 1px dotted rgba(49, 41, 64, 0.22);
+}
+.tech-stack .row {
+    margin-top: 75px;
+    margin-bottom: 50px;
+}
+.tech-stack .row p {
+    text-align: center;
+    color: #5d5d5d;
+    font-size: 14px;
+    margin-top: 10px;
 }
 p 
 {
   font-size: 16px;
+}
+.navbar-default {
+    background-color: #ffffff;
 }
 .margin 
 {
   margin-bottom: 45px;
 }
 
-.bg-1 
-{ 
-    background: url(../images/lonewolf2.jpg) center center no-repeat;
+.container-1 {
+    padding:0;
+    min-height:600px;
+    padding-bottom:0 !important;
+}
+.cont-who-am-i {
+        font-family: "Satisfy";
+    color: #3a3a3a;
+}
+.container-breaks {
+    min-height:100px;
+    padding: 50px;
+    text-align: center;
+    color: #272834;
+    font-family:  "Satisfy";
+}
+.pub-div {
+        border: 1px solid #ccc;
+    padding: 25px;
+    text-align: left;
+    cursor: pointer;
+}
+.pub-div .head{
+    font-weight: 600;
+    color: slategrey;
+}
+.pub-div .head-sub {
+    margin-top: -20px;
+}
+.pub-div a {
+    text-decoration: none;
+}
+.i-bg img{
+    width:100%;
+}
+.mydetail-txt {
+        line-height: 50px;
+    text-align: justify;
+}
+.first-container-bg {
+    width:100%;
+    background: url(../images/me-transparent.png) center center no-repeat;
     color: #ffffff;
-    min-height: 450px;
+    min-height: 600px;
     background-size: cover;
-    padding-bottom: 20px !important;
+    background-attachment: fixed;
+    background-color: lightslategray;
+    filter: blur(5px);
+    min-height:600px;
+}
+.first-container-content {
+    position: absolute;
+    top:50px;
+    left:0px;
+    width: 100%;
+    min-height:600px;
 }
 .bg-2 
 { 
-    background-color: #f8f8f8;
+    background-color: lavender;
     color: #474e5d;
 }
 .bg-3 
@@ -56,6 +127,8 @@ p
   margin-bottom: 0;
   font-size: 12px;
   letter-spacing: 5px;
+        border-bottom: 1px solid #eee;
+    box-shadow: 0px 1px 5px #efefef;
 }
 .navbar-nav  li a:hover {
     color: #1abc9c !important;
@@ -86,20 +159,23 @@ p
 }
 .header-text
 {
-    background: rgba(0, 0, 0, 0.52);
+    background: rgba(0, 0, 0, 0.55);
+    height: 601px;
     width: 100%;
-    height: 350px;
 }
 .header-text h1
 {
-    line-height: 60px;
-    padding: 60px;
+/*    font-family: 'Monoton'; */
+    font-family: Permanent Marker;
+    text-align: left;
+    width: 50%;
+    padding: 174px 100px;
 }
 
 /* timeline */
 /* Variables */
 /* Fonts */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,700);
+
 body {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 1em;
@@ -216,7 +292,133 @@ margin: 4em auto;
       position: absolute;
     width: 50px;
 }
+.pf-item-thumb img{
+    width: 100%;
+}
+.tech-stack {
+    padding: 75px;
+    background: lightgoldenrodyellow;
+}
+.tech-stack p {
+    color: #000;
+}
+.tech-stack-thumb img {
+    width:100%;
+}
 .timeline-cicon img
 {
   width: 100%;
+}
+.pf-item {
+    min-height: 300px;
+    margin: 20px 50px;
+    border: 1px solid #e8e8e8;
+    background: ghostwhite;
+    padding: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.pf-item-short-detail {
+        color: #3a3a3a;
+    text-align: center;
+}
+.portfolio h3 {
+    color: #444444;
+    text-align: center;
+    padding: 20px 30px 21px;
+    font-family: Satisfy;
+    border-bottom: 1px dotted rgba(49, 41, 64, 0.22);
+}
+.m-modal {
+    color: #2b2b2b;
+    text-align: left;
+    font-family: Satisfy;
+}
+.publication {
+    background-color:lightslategrey;
+}
+.extra-bg
+{
+    padding: 0px;
+}
+.extra {
+    padding-left: 0px;
+    padding-right:0px;
+    background: slategray;
+}
+.extra h3 {
+        color: #ffffff;
+    padding: 0px 30px 21px;
+    font-family: Satisfy;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.22);
+    margin-bottom: 25px;
+}
+.extra-content-bg {
+    padding:0;
+}
+.extra-cards {
+    border-radius: 5px;
+    background: ghostwhite;
+    color: #404040;
+    padding: 25px 50px;
+        margin: 10px 0px;
+}
+.extra-cards h4
+{
+    padding: 0px 30px 21px;
+    font-family: Satisfy;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.22);
+    margin-bottom: 25px;
+}
+.container-contact {
+        background: #2f2f2f;
+    text-align: center;
+    font-family: Satisfy;
+}
+.soc-ico {
+    transition: all 0.2s ease-in-out;
+    padding: 15px;
+    border-radius: 5px;
+}
+.soc-ico:hover {
+    background: slategray;
+    transition: all 0.2s ease-in-out;
+}
+.container-contact img {
+ width: 70%;
+    margin: 0px auto;
+    cursor: pointer;
+
+}
+
+footer {
+        padding-top: 35px;
+    padding-bottom: 20px;
+}
+.modal-head-img {
+    width:25%;
+    margin:0px auto;
+}
+.modal-head-img img {
+    width:100%;
+}
+.m-modal .modal-body {
+    font-family: Averia Serif Libre;
+}
+.modal-detail {
+    font-family: 'Ubuntu', sans-serif;
+    text-align: center;
+    padding: 25px;
+}
+.modal-detail .detail-header {
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 0px;
+    width: 25%;
+    margin: 15px auto -10px;
+    padding: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.modal-detail .detail-content {
+    font-size:13px;
 }

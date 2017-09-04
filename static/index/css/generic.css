@@ -26,14 +26,18 @@
 .tech-stack .row p {
     text-align: center;
     color: #5d5d5d;
-    font-size: 14px;
-    margin-top: 10px;
+    font-size: 100%;
+    margin-top: 10px;;
 }
 .extra-bg img {
         width: 100%;
 }
+.resume-object {
+    min-height: 500px;
+}
 iframe {
     max-width: 100% !important;
+    min-width: 0 !important;
 }
 p 
 {
@@ -121,7 +125,7 @@ p
 }
 .container-fluid 
 {
-    padding-top: 70px;
+
     padding-bottom: 70px;
 }
 .navbar 
@@ -135,6 +139,7 @@ p
   letter-spacing: 5px;
         border-bottom: 1px solid #eee;
     box-shadow: 0px 1px 5px #efefef;
+    z-index:99;
 }
 .navbar-nav  li a:hover {
     color: #1abc9c !important;
@@ -427,4 +432,17 @@ footer {
 }
 .modal-detail .detail-content {
     font-size:13px;
+}
+.bg-2 h3 {
+        color: #444444;
+    text-align: center;
+    padding: 20px 30px 21px;
+    font-family: Satisfy;
+    border-bottom: 1px dotted rgba(49, 41, 64, 0.22);
+}
+#alert {
+    text-align: center;
+}
+.alert {
+    font-size: 150%;
 }

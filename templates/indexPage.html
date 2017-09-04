@@ -8,7 +8,9 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{% static 'index/js/generic.js' %}"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'index/css/generic.css' %}">
 </head>
 <body>
@@ -24,9 +26,9 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-{#        <li><a href="#">WHO</a></li>#}
-{#        <li><a href="#">WHAT</a></li>#}
-{#        <li><a href="#">WHERE</a></li>#}
+        <li data-toggle="modal" data-target="#nav-hireme"><a href="#">Hire Me</a></li>
+        <li data-toggle="modal" data-target="#nav-resume"><a href="#">Resume</a></li>
+          <li data-toggle="modal" data-target="#nav-help"><a href="#">Seek Help</a></li>
       </ul>
     </div>
   </div>
@@ -425,6 +427,101 @@
       </div>
       <div class="modal-footer">
           <a href="http://typingkeeda.some-one.me/" target="_blank"><button class="modal-btn btn btn-primary">View Live</button></a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="nav-hireme" class="modal fade m-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" style="text-align: center;">Hire Me<sub></sub></h4>
+      </div>
+      <div class="modal-body col-md-12">
+          <form id="hireme-form">
+              <div class="form-group">
+                  <input class="form-control" type="email" name="email" placeholder="yourcontact@example.com" required>
+              </div>
+              <div class="form-group">
+                  <textarea name="message" placeholder="Message" class="form-control"></textarea>
+              </div>
+              <div class="form-group">
+                  <input class="form-control btn btn-primary" type="submit" value="Hire Me">
+              </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="nav-resume" class="modal fade m-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" style="text-align: center;">Resume<sub></sub></h4>
+      </div>
+      <div class="modal-body col-md-12">
+         <object class="col-md-12 resume-object" datasrc="{% static 'index/docs/resume.pdf' %}" data="{% static 'index/docs/resume.pdf' %}">
+         </object>
+      </div>
+      <div class="modal-footer">
+          <a href="{% static 'index/docs/resume.pdf' %}" target="_blank"><button class="btn btn-primary">Download</button></a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="nav-help" class="modal fade m-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" style="text-align: center;">Seek Help<sub></sub></h4>
+      </div>
+      <div class="modal-body col-md-12">
+         <form id="helpform" action="POST">
+            <div class="form-group">
+             <input class="form-control" type="text" name="name" placeholder="Your Name">
+            </div>
+             <div class="form-group">
+             <input class="form-control" type="email" name="email" placeholder="Your Email">
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="message" placeholder="how can i help you ?"></textarea>
+            </div>
+             <div class="form-group text-center">
+                 <input type="submit" value="Get Help" class="btn btn-primary">
+             </div>
+         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="alert" class="modal fade m-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body col-md-12">
+          <div class="text-center" id="alert-message">
+
+          </div>
+      </div>
+      <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>

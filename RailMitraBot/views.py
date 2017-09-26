@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import json
-
 from django.shortcuts import render
-
 import railapi
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
@@ -17,7 +15,6 @@ ai = apiai.ApiAI(token)
 
 def privacypolicy(request):
     return render(request, 'privacypolicyrailmitra.html', context={})
-
 
 class RailMitraView(generic.View):
     def get(self, request, *args, **kwargs):
@@ -46,11 +43,15 @@ class RailMitraView(generic.View):
                         airesponsetext = json.loads(airesponse.read())
                         try:
                             if airesponsetext['result']['metadata']['intentName'] == 'LiveStation':
-                                railapi.getStationNamesforliveStation(fbid, airesponsetext['result']['parameters'][
-                                    'sourceStation'], airesponsetext['result']['parameters']['DestinationStation'], 1)
+                                if airesponsetext['result']['parameters']['sourceStation'] == '' or airesponsetext['result']['parameters']['DestinationStation'] == '':
+                                    railapi.post_facebook_message_normal(fbid, "Something is missing ! Type 'help' for supported commands")
+                                else:
+                                    railapi.getStationNamesforliveStation(fbid, airesponsetext['result']['parameters']['sourceStation'], airesponsetext['result']['parameters']['DestinationStation'], 1)
                             elif airesponsetext['result']['metadata']['intentName'] == 'TrainStatus':
-                                running_status(fbid, airesponsetext['result']['parameters']['trainNumber'],
-                                               airesponsetext['result']['parameters']['boardingStation'])
+                                if airesponsetext['result']['parameters']['trainNumber'] == '' or airesponsetext['result']['parameters']['boardingStation'] == '':
+                                    railapi.post_facebook_message_normal(fbid, "Something is missing ! Type 'help' for supported commands")
+                                else:
+                                    running_status(fbid, airesponsetext['result']['parameters']['trainNumber'], airesponsetext['result']['parameters']['boardingStation'])
                             elif airesponsetext['result']['metadata']['intentName'] == 'What Can I ask':
                                 intentText = 'You can start asking me \n Who are you? \n Who is your boss? \n you are fired ? \n You are bad \n What\'s your birth date? \n are you busy? \n can you help me? \n you are good. \n are you happy? \n do you have a hobby? \n are you hungy? \n are we friends? \n where do you live? \n For more commands reply with More'
                                 railapi.post_facebook_message_normal(fbid, intentText)
@@ -59,23 +60,16 @@ class RailMitraView(generic.View):
                                 intentText = 'Some more Commands are \n I am very angry right now. \n I am back \n I am bored \n I am busy \n I can\'t sleep \n I am here \n I like you. \n I am so lonely \n what do i look like \n I love you. \n I need an advice \n I am sad \n I am sleepy. \n I am just testing you. \n Give me a hug. \n You are wrong. \n'
                                 railapi.post_facebook_message_normal(fbid, intentText)
                                 return HttpResponse()
+                            elif airesponsetext['result']['metadata']['intentName'] == 'help':
+                                i_need_help(fbid)
+                            elif airesponsetext['result']['metadata']['intentName'] == 'introduction':
+                                railapi.defaultMessage(fbid)
+                            else:
+                                print airesponsetext['result']['metadata']['intentName']
+                                railapi.post_facebook_message_normal(fbid, airesponsetext['result']['fulfillment']['speech'])
                         except:
                             pass
-                        try:
-                            messageArgs = str(text).split()
-                            messageArgsLen = len(messageArgs)
-                        except UnicodeEncodeError:
-                            railapi.post_facebook_message_normal(fbid, text)
-                            return HttpResponse()
-                        if messageArgsLen == 1 and str(messageArgs[0]).strip().lower() == 'help':
-                            i_need_help(fbid)
-                        elif messageArgsLen == 1 and str(messageArgs[0]).strip().lower() == ('hi' or 'hello' or 'hey'):
-                            railapi.defaultMessage(fbid)
-                        else:
-                            railapi.post_facebook_message_normal(fbid,
-                                                                 airesponsetext['result']['fulfillment']['speech'])
                     elif 'attachments' in message['message']:
-                        print(message['message'])
                         data = {"attachment": {"type": "image", "payload": {
                             "url": "https://scontent.xx.fbcdn.net/v/t39.1997-6/851557_369239266556155_759568595_n.png?_nc_ad=z-m&oh=dc20f0f3ab1494f22a217cdbbdd41561&oe=59FF76DC"}}}
                         railapi.sendAttachment(fbid, data)

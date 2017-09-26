@@ -68,7 +68,7 @@ class RailMitraView(generic.View):
                                 print airesponsetext['result']['metadata']['intentName']
                                 railapi.post_facebook_message_normal(fbid, airesponsetext['result']['fulfillment']['speech'])
                         except:
-                            pass
+                            railapi.post_facebook_message_normal(fbid, airesponsetext['result']['fulfillment']['speech'])
                     elif 'attachments' in message['message']:
                         data = {"attachment": {"type": "image", "payload": {
                             "url": "https://scontent.xx.fbcdn.net/v/t39.1997-6/851557_369239266556155_759568595_n.png?_nc_ad=z-m&oh=dc20f0f3ab1494f22a217cdbbdd41561&oe=59FF76DC"}}}

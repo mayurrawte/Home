@@ -21,8 +21,7 @@ def sendResultUrl(request):
                      ]
                 }
             ],
-        "from":
-            {"email": "no-reply@zingur.menpm install --save @jaspero/ng2-alerts"},
+        "from":{"email": "no-reply@zingur.me"},
             "subject": "Zingur Challange Result Link",
         "content":
             [

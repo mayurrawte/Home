@@ -37,3 +37,4 @@ def sendMail(request):
         response = sg.client.mail.send.post(request_body=mail.get())
         resData = {'status': response.status_code, 'body': response.body}
         return JsonResponse(resData, safe=False)
+    

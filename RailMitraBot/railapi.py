@@ -2346,3 +2346,6 @@ def split(arr, size):
     return arrs
 
 
+
+def getPnr(pnr):
+    qurl = "http://api.railwayapi.com/v2/pnr-status/"+ pnr +"/apikey/gcla1b1ede/";

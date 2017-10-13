@@ -11,25 +11,27 @@ header = {'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json'}
 
 @csrf_exempt
 def sendResultUrl(request):
+    resData = json.loads(request.body)
     data = {
         "personalizations":
             [
                 {"to":
                      [
-                         {"email": str(request.POST.get('to'))}
+                         {"email": str(resData['to'])}
                      ]
                 }
             ],
         "from":
-            {"email": "no-reply@zingur.me"},
+            {"email": "no-reply@zingur.menpm install --save @jaspero/ng2-alerts"},
             "subject": "Zingur Challange Result Link",
         "content":
             [
-                {"type": "text/plain", "value": "Hey " + str(request.POST.get('name')) + "\n Your quiz successfully created and ready to be shared with your friends.\n Result this quiz can be accessed by using this link \n " + str(request.POST.get('resulturl')) + "\n Thank You"}
+                {"type": "text/html", "value": "<h3>Hey " + str(resData['name']) + " </h3><br /> <p>Your quiz successfully created and ready to be shared with your friends.<br />Result this quiz can be accessed by using this link <br /><a href='" + str(resData['resulturl']) + "'>Click Here </a><br /> Thank You </p>"}
             ]
     }
+    print request.body
     r = requests.post(url, data=json.dumps(data), headers=header)
-    return HttpResponse(r.status_code)
+    return HttpResponse(r.text)
 
 def contactMe(request):
     data = {"personalizations": [{"to": [{"email": "m.r.rawte7@gmail.com"}]}], "from": {"email": "contactme@zingur.me"},

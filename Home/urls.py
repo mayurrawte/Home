@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from IndexApp.views import sendMail
+from zingur.views import sendResultUrl, contactMe
 
 urlpatterns = [
     url(r'^$', include('IndexApp.urls')),
@@ -23,5 +24,7 @@ urlpatterns = [
     url(r'^fb_AiSHA/', include('AiSHABot.urls')),
     url(r'^railmitra/', include('RailMitraBot.urls')),
     url(r'^trafficguru/', include('TrafficGuru.urls')),
-    url(r'^send-mail/', sendMail)
+    url(r'^send-mail/', sendMail),
+    url(r'^zingur/sendresult', sendResultUrl),
+    url(r'^zingur/contactme', contactMe)
 ]
